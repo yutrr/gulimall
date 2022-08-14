@@ -31,6 +31,8 @@ public class WareSkuController {
     private WareSkuService wareSkuService;
 
     /**
+     * 查询商品库存
+     * /ware/waresku/list
      * 列表
      */
     @RequestMapping("/list")

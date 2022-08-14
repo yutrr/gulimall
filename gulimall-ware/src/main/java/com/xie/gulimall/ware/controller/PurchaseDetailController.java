@@ -31,6 +31,8 @@ public class PurchaseDetailController {
     private PurchaseDetailService purchaseDetailService;
 
     /**
+     * 查询采购需求
+     * /ware/purchasedetail/list
      * 列表
      */
     @RequestMapping("/list")
