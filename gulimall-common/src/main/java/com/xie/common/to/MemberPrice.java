@@ -14,16 +14,16 @@ import java.math.BigDecimal;
  * @website http://www.bejson.com/java2pojo/
  */
 
-public class MemberPrices {
+public class MemberPrice {
 
     private Long id;
     private String name;
     private BigDecimal price;
 
-    public MemberPrices() {
+    public MemberPrice() {
     }
 
-    public MemberPrices(Long id, String name, BigDecimal price) {
+    public MemberPrice(Long id, String name, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.price = price;

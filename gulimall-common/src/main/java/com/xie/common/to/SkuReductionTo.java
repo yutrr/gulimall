@@ -19,12 +19,12 @@ public class SkuReductionTo {
     private BigDecimal fullPrice;
     private BigDecimal reducePrice;
     private int priceStatus;
-    private List<MemberPrices> memberPrice;
+    private List<MemberPrice> memberPrice;
 
     public SkuReductionTo() {
     }
 
-    public SkuReductionTo(Long skuId, int fullCount, BigDecimal discount, int countStatus, BigDecimal fullPrice, BigDecimal reducePrice, int priceStatus, List<MemberPrices> memberPrice) {
+    public SkuReductionTo(Long skuId, int fullCount, BigDecimal discount, int countStatus, BigDecimal fullPrice, BigDecimal reducePrice, int priceStatus, List<MemberPrice> memberPrice) {
         this.skuId = skuId;
         this.fullCount = fullCount;
         this.discount = discount;
@@ -105,11 +105,11 @@ public class SkuReductionTo {
         this.priceStatus = priceStatus;
     }
 
-    public List<MemberPrices> getMemberPrice() {
+    public List<MemberPrice> getMemberPrice() {
         return memberPrice;
     }
 
-    public void setMemberPrice(List<MemberPrices> memberPrice) {
+    public void setMemberPrice(List<MemberPrice> memberPrice) {
         this.memberPrice = memberPrice;
     }
 }

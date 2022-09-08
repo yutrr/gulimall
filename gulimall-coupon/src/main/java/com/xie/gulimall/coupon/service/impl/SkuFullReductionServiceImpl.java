@@ -1,6 +1,6 @@
 package com.xie.gulimall.coupon.service.impl;
 
-import com.xie.common.to.MemberPrices;
+import com.xie.common.to.MemberPrice;
 import com.xie.common.to.SkuReductionTo;
 import com.xie.gulimall.coupon.entity.MemberPriceEntity;
 import com.xie.gulimall.coupon.entity.SkuLadderEntity;
@@ -68,7 +68,7 @@ public class SkuFullReductionServiceImpl extends ServiceImpl<SkuFullReductionDao
 
 
         //3.sms_member_price
-        List<MemberPrices> memberPrice = reductionTo.getMemberPrice();
+        List<MemberPrice> memberPrice = reductionTo.getMemberPrice();
         List<MemberPriceEntity> collect = memberPrice.stream().map(item -> {
             MemberPriceEntity priceEntity = new MemberPriceEntity();
             priceEntity.setSkuId(reductionTo.getSkuId());

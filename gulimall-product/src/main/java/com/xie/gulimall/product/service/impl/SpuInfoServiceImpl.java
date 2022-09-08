@@ -2,7 +2,6 @@ package com.xie.gulimall.product.service.impl;
 
 import com.xie.common.to.SkuReductionTo;
 import com.xie.common.to.SpuBoundsTo;
-import com.xie.common.to.MemberPrices;
 import com.xie.common.utils.R;
 import com.xie.gulimall.product.entity.*;
 import com.xie.gulimall.product.feign.CouponFeignService;
@@ -168,13 +167,13 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
                         //5.4 sku的优惠，满减等信息  (跨库)gulimall-sms->sms-sku_ladder\sms_sku_full_reduction\sms_member_price
                         SkuReductionTo skuReductionTo = new SkuReductionTo();
-                List<MemberPrice> memberPrices = item.getMemberPrice();
+                /*List<MemberPrice> memberPrices = item.getMemberPrice();
                 List<MemberPrices> objects = memberPrices.stream().map(map -> {
                     MemberPrices memberPrice = new MemberPrices();
                     BeanUtils.copyProperties(map, memberPrice);
                     return memberPrice;
                 }).collect(Collectors.toList());
-                skuReductionTo.setMemberPrice(objects);
+                skuReductionTo.setMemberPrice(objects);*/
                 BeanUtils.copyProperties(item,skuReductionTo);
                         skuReductionTo.setSkuId(skuId);
                         if (skuReductionTo.getFullCount()>0 || skuReductionTo.getFullPrice().compareTo(new BigDecimal("0"))==1){
