@@ -22,7 +22,7 @@ mybatis-plus:
     db-config:
       id-type: auto
 server:
-  port: 12000
+  port: 13000
 logging:
   level:
     com.xie: debug

@@ -8,6 +8,8 @@
 
 package com.xie.common.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -16,11 +18,35 @@ import java.util.Map;
 /**
  * 返回数据
  *
- * @author Mark sunlightcs@gmail.com
+ * @author
  */
 public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
-	
+
+	public <T> T getData(String key, TypeReference<T> typeReference) {
+		Object data = get(key);// 默认是map类型，springmvc做的
+		String jsonStr = JSON.toJSONString(data);
+		T t = JSON.parseObject(jsonStr, typeReference);
+		return t;
+	}
+
+	// 利用fastJson进行逆转
+// 这里要声明泛型<T>，这个泛型只跟方法有关，跟类无关。
+// 例如类上有个泛型，这里可以使用类上的泛型，就不用声明
+	public <T> T getData(TypeReference<T> typeReference) {
+		Object data = get("data");// 默认是map类型，springmvc做的
+		String jsonStr = JSON.toJSONString(data);
+		T t = JSON.parseObject(jsonStr,typeReference);
+		return t;
+	}
+
+	public R setData(Object data) {
+		put("data", data);
+		return this;
+	}
+
+
+
 	public R() {
 		put("code", 0);
 		put("msg", "success");

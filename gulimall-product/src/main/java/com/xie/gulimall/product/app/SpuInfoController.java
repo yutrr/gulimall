@@ -1,4 +1,4 @@
-package com.xie.gulimall.product.controller;
+package com.xie.gulimall.product.app;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -26,6 +26,19 @@ import com.xie.common.utils.R;
 public class SpuInfoController {
     @Autowired
     private SpuInfoService spuInfoService;
+
+
+    /**
+     * 商品上架
+     * product/spuinfo/{spuId}/up
+     */
+   @PostMapping("/{spuId}/up")
+    //@RequiresPermissions("product:spuinfo:list")
+    public R spuUp(@PathVariable("spuId")Long spuId){
+        spuInfoService.up(spuId);
+
+        return R.ok();
+    }
 
     /**
      * spu检索

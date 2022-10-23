@@ -1,14 +1,12 @@
-package com.xie.gulimall.product.controller;
+package com.xie.gulimall.product.app;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.xie.common.valid.AddGroup;
 import com.xie.common.valid.UpdateGroup;
 import com.xie.common.valid.UpdateStatusGroup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,8 +18,6 @@ import com.xie.gulimall.product.entity.BrandEntity;
 import com.xie.gulimall.product.service.BrandService;
 import com.xie.common.utils.PageUtils;
 import com.xie.common.utils.R;
-
-import javax.validation.Valid;
 
 
 /**

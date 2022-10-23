@@ -1,5 +1,5 @@
 server:
-  port: 11000
+  port: 11001
 #配置数据库驱动
 spring:
   datasource:
@@ -21,6 +21,11 @@ spring:
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
+  redis:
+    host: 192.168.12.128
+    port: 6379
 
 #mysql映射文件,自增组件
 mybatis-plus:
@@ -32,4 +37,4 @@ mybatis-plus:
       logic-not-delete-value: 0
 logging:
   level:
-    com.xie.gulimall: debug
+    com.xie.gulimall: error

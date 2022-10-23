@@ -1,19 +1,16 @@
-package com.xie.gulimall.product.controller;
+package com.xie.gulimall.product.app;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xie.gulimall.product.entity.CategoryEntity;
 import com.xie.gulimall.product.service.CategoryService;
-import com.xie.common.utils.PageUtils;
 import com.xie.common.utils.R;
 
 
