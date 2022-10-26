@@ -1,9 +1,12 @@
 package com.xie.gulimall.product;
 
+import com.xie.gulimall.product.service.AttrGroupService;
 import com.xie.gulimall.product.service.CategoryService;
+import com.xie.gulimall.product.vo.SpuItemAttrGroupVo;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Var;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -13,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -29,6 +33,23 @@ class GulimallProductApplicationTests {
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    RedissonClient redissonClient;
+
+    @Autowired
+    AttrGroupService attrGroupService;
+
+    @Test
+    public void test1(){
+        List<SpuItemAttrGroupVo> attrGroupWithAttrsBySpuId = attrGroupService.getAttrGroupWithAttrsBySpuId(5L, 225L);
+        System.out.println(attrGroupWithAttrsBySpuId);
+
+    }
+    @Test
+    public void redisson(){
+        System.out.println(redissonClient);
+    }
 
     @Test
     public void testStringRedisTemplate(){
