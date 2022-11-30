@@ -1,5 +1,5 @@
 server:
-  port: 11001
+  port: 13000
 #配置数据库驱动
 spring:
   datasource:

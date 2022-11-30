@@ -92,5 +92,18 @@ public class MemberEntity implements Serializable {
 	 * 注册时间
 	 */
 	private Date createTime;
+	/**
+	 * 社交用户的唯一id
+	 */
+	private String socialUid;
+	/**
+	 * 访问令牌
+	 */
+	private String accessToken;
+	/**
+	 * 访问令牌的时间
+	 */
+	private Long expiresIn;
+
 
 }
