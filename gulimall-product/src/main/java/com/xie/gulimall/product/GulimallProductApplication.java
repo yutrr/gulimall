@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 
 /**
@@ -108,6 +109,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  *  ->想改缓存的配置，只需要给容器中放一个RedisCacheConfiguration即可
  *  ->就会应用到当前RedisCacheManager管理的所有缓存分区中
  */
+@EnableRedisHttpSession
 @EnableFeignClients(basePackages = "com.xie.gulimall.product.feign")
 @EnableDiscoveryClient
 @SpringBootApplication

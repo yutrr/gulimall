@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import vo.MemberResponseVo;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -138,15 +140,33 @@ public class LoginController {
         }
     }
 
+    /**
+     * 判断session是否有loginUser，没有就跳转登录页面，有就跳转首页
+     */
+    @GetMapping("/login.html")
+    public String loginPage(HttpSession session){
+        //从session先取出来用户的信息，判断用户是否已经登录过了
+        Object attribute = session.getAttribute(AuthServerConstant.LOGIN_USER);
+        //如果用户没登录那就跳转到登录页面
+        if (attribute==null){
+            //没登录
+            return "login";
+        }else{
+            return "redirect:http://gulimall.com";
+        }
+
+    }
+
     @PostMapping("/login")
-    public String login(UserLoginVo vo,RedirectAttributes redirectAttributes){
+    public String login(UserLoginVo vo, RedirectAttributes redirectAttributes, HttpSession session){
 
         //远程登录
         R login = memberFeignService.login(vo);
         if (login.getCode()==0){
             //成功
-//            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {});
-//            session.setAttribute(AuthServerConstant.LOGIN_USER, data);
+            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {});
+            //放到session中
+            session.setAttribute(AuthServerConstant.LOGIN_USER, data);
             return "redirect:http://gulimall.com";
         }else {
             //失败

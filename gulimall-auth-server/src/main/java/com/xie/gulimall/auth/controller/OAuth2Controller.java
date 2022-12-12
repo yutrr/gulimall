@@ -67,6 +67,8 @@ public class OAuth2Controller {
 
                 //1、第一次使用session，命令浏览器保存卡号，JSESSIONID这个cookie
                 //以后浏览器访问哪个网站就会带上这个网站的cookie
+                //子域之间  .gulimall.com  auth.gulimall.com  order.gulimall.com
+                //发卡的时候（指定域名为父域名），即使是子域系统发的卡，也能让父域直接使用。
                 //TODO 1、默认发的令牌。当前域（解决子域session共享问题）
                 //TODO 2、使用JSON的序列化方式来序列化对象到Redis中
                 session.setAttribute(AuthServerConstant.LOGIN_USER, data);
