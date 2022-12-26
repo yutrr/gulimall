@@ -1,5 +1,6 @@
 package com.xie.gulimall.ssoserver.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ public class LoginController {
 
     @GetMapping("/login.html")
     public String loginPage(@RequestParam(value = "redirect_url",required = false) String url, Model model, @CookieValue(value = "sso_token", required = false) String sso_token) {
-        if (!StringUtils.isEmpty(sso_token)) {
+        if (!BeanUtil.isEmpty(sso_token)) {
             return "redirect:" + url + "?token=" + sso_token;
         }
         model.addAttribute("url", url);
@@ -48,7 +49,7 @@ public class LoginController {
                           HttpServletResponse response) {
 
         //登录成功跳转，跳回到登录页
-        if (!StringUtils.isEmpty(username) && !StringUtils.isEmpty(password)) {
+        if (!BeanUtil.isEmpty(username) && !BeanUtil.isEmpty(password)) {
 
             String uuid = UUID.randomUUID().toString().replace("_", "");
             redisTemplate.opsForValue().set(uuid, username);

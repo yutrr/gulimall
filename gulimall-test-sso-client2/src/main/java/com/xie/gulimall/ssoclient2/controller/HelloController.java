@@ -7,6 +7,7 @@ package com.xie.gulimall.ssoclient2.controller;
  * @Version 1.0
  */
 
+import cn.hutool.core.bean.BeanUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +42,7 @@ public class HelloController {
     @GetMapping(value = "/boss")
     public String employees(Model model, HttpSession session, @RequestParam(value = "token", required = false) String token) {
 
-        if (!StringUtils.isEmpty(token)) {
+        if (!BeanUtil.isEmpty(token)) {
             RestTemplate restTemplate=new RestTemplate();
             ResponseEntity<String> forEntity = restTemplate.getForEntity("http://ssoserver.com:8080/userinfo?token=" + token, String.class);
             String body = forEntity.getBody();

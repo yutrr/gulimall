@@ -1,8 +1,6 @@
-package vo;
+package com.xie.common.vo;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import lombok.Data;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;

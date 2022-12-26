@@ -59,7 +59,7 @@
 						<ul class="header_ul_right">
 							<li style="border: 0;">
 								<a href="http://auth.gulimall.com/login.html" th:if="${session.loginUser==null}" class="aa">你好，请登录</a>
-								<a th:else class="aa">欢迎：[[${session.loginUser.nickname}]]</a>
+								<a th:if="${session.loginUser!=null}" class="aa">欢迎：[[${session.loginUser.nickname}]]</a>
 							</li>
 							<li th:if="${session.loginUser==null}"><a href="http://auth.gulimall.com/reg.html" style="color: red;">免费注册</a> |</li>
 							<li><a href="/static/item/javascript:;" class="aa">我的订单</a> |</li>
@@ -257,7 +257,7 @@
 						<div class="nav_top_one">
 							<a href="http://gulimall.com"><img src="/static/item/img/111.png"/></a></div>
 						<div class="nav_top_two"><input type="text"/><button>搜索</button></div>
-						<div class="nav_top_three"><a href="/static/item/../JD_Shop/One_JDshop.html">我的购物车</a><span class="glyphicon glyphicon-shopping-cart"></span>
+						<div class="nav_top_three"><a href="http://cart.gulimall.com/cart.html">我的购物车</a><span class="glyphicon glyphicon-shopping-cart"></span>
 							<div class="nav_top_three_1">
 								<img src="/static/item/img/44.png"/>购物车还没有商品，赶紧选购吧！
 							</div>
@@ -612,7 +612,7 @@
 
 						<div class="box-btns clear">
 							<div class="box-btns-one">
-								<input type="text" name="" id="" value="1" />
+								<input type="text" name="" id="numInput" value="1" />
 								<div class="box-btns-one1">
 
 									<div>
@@ -629,8 +629,8 @@
 								</div>
 							</div>
 							<div class="box-btns-two">
-								<a href="/static/item/../商品分类\index.html">
-									立即预约
+								<a class="addToCart" href="#" th:attr="skuId=${item.info.skuId}">
+									加入购物车
 								</a>
 							</div>
 							<div class="box-btns-three">
@@ -1273,33 +1273,43 @@
 	<script type="text/javascript">
 	</script>
 <script>
-	$(".sku_attr_value").click(function (){
-		//1.点击的元素先添加上自定义的属性。为了识别我们是刚才被点击的
-		var skus=new Array();
-		$(this).addClass("clicked");
-		var curr=$(this).attr("skus").split(",");
-		//当前被点击的所有sku组合数组放进去
-		skus.push(curr);
-		//去掉同一行的所有checked
+	$(".sku_attr_value").click(function () {
+		// 1、点击的元素添加上自定义的属性
+		let skus = new Array();
+		let curr = $(this).attr("skus").split(",");
+
 		$(this).parent().parent().find(".sku_attr_value").removeClass("checked");
+		$(this).addClass("checked");
+		changeCheckedStyle();
 
-		$("a[class='sku_attr_value checked']").each(function (){
+		$("a[class='sku_attr_value checked']").each(function () {
 			skus.push($(this).attr("skus").split(","));
-		})
-		console.log(skus);
-		//3.取出他们的交集，得到skuId
-		var filterEle=skus[0];
-		for(i=0;i<skus.length;i++){
-			filterEle=$(filterEle).filter(skus[i]);
-		}
-		console.log(filterEle[0]);
-		location.href="http://item.gulimall.com/"+filterEle[0]+".html";
-		//4.跳转
-	});
-	$(function (){
-		$(".sku_attr_value").parent().css({"border":"solid 1px #CCC"});
-		$("a[class='sku_attr_value checked']").parent().css({"border":"solid 1px red"});
+		});
 
-	})
+		let filterEle = skus[0];
+		for (let i = 1; i < skus.length; i++) {
+			filterEle = $(filterEle).filter(skus[i])[0];
+		}
+
+		location.href = "http://item.gulimall.com/" + filterEle + ".html";
+
+		return false;
+	});
+	$(function () {
+		changeCheckedStyle();
+	});
+
+	function changeCheckedStyle() {
+		$(".sku_attr_value").parent().css({"border": "solid 1px #ccc"});
+		$("a[class='sku_attr_value checked']").parent().css({"border": "solid 1px red"});
+	};
+
+
+	$(".addToCart").click(function () {
+		let skuId = $(this).attr("skuId");
+		let num = $("#numInput").val();
+		location.href = "http://cart.gulimall.com/addToCart?skuId=" + skuId + "&num=" + num;
+		return false;
+	});
 </script>
 </html>

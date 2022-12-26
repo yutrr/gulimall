@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import vo.MemberResponseVo;
+import com.xie.common.vo.MemberResponseVo;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
