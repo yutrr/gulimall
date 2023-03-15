@@ -17,7 +17,7 @@ import java.util.List;
  * 购物项内容
  *
  */
-public class CartItem implements Serializable {
+public class CartItemVo implements Serializable {
     private Long skuId;
     private Boolean check=true;
     private String title;

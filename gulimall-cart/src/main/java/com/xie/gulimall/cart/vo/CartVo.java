@@ -17,9 +17,9 @@ import java.util.List;
  * 需要计算的属性，必须重写他的get方法，保证每次获取属性都会进行计算
  */
 
-public class Cart implements Serializable {
+public class CartVo implements Serializable {
 
-     private List<CartItem> items;
+     private List<CartItemVo> items;
 
      private Integer countNum;//商品数量
 
@@ -29,18 +29,18 @@ public class Cart implements Serializable {
 
     private BigDecimal reduce=new BigDecimal("0.00");//减免价格
 
-    public List<CartItem> getItems() {
+    public List<CartItemVo> getItems() {
         return items;
     }
 
-    public void setItems(List<CartItem> items) {
+    public void setItems(List<CartItemVo> items) {
         this.items = items;
     }
 
     public Integer getCountNum() {
         int count=0;
         if (items!=null && items.size()>0){
-            for (CartItem item : items) {
+            for (CartItemVo item : items) {
                 count+=item.getCount();
             }
         }
@@ -50,7 +50,7 @@ public class Cart implements Serializable {
     public Integer getCountType() {
         int count=0;
         if (items!=null && items.size()>0){
-            for (CartItem item : items) {
+            for (CartItemVo item : items) {
                 count+=1;
             }
         }
@@ -61,9 +61,11 @@ public class Cart implements Serializable {
         BigDecimal amount = new BigDecimal("0");
         //1.计算购物项总价
         if (items!=null && items.size()>0){
-            for (CartItem item : items) {
-                BigDecimal totalPrice = item.getTotalPrice();
-                amount=amount.add(totalPrice);
+            for (CartItemVo item : items) {
+                if (item.getCheck()) {
+                    BigDecimal totalPrice = item.getTotalPrice();
+                    amount = amount.add(totalPrice);
+                }
             }
         }
 

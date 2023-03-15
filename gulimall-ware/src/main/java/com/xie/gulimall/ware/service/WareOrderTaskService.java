@@ -7,6 +7,7 @@ import com.xie.gulimall.ware.entity.WareOrderTaskEntity;
 import java.util.Map;
 
 /**
+ *
  * 库存工作单
  *
  * @author xiehaijun
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface WareOrderTaskService extends IService<WareOrderTaskEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    WareOrderTaskEntity getOrderTaskByOrderSn(String orderSn);
 }
 

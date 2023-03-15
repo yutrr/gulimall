@@ -1,19 +1,17 @@
 package com.xie.gulimall.cart.controller;
 
-import com.xie.common.constant.AuthServerConstant;
-import com.xie.gulimall.cart.interceptor.CartInterceptor;
 import com.xie.gulimall.cart.service.CartService;
-import com.xie.gulimall.cart.vo.Cart;
-import com.xie.gulimall.cart.vo.CartItem;
-import com.xie.gulimall.cart.vo.UserInfoTo;
+import com.xie.gulimall.cart.vo.CartVo;
+import com.xie.gulimall.cart.vo.CartItemVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -27,6 +25,21 @@ public class CartController {
 
     @Autowired
     CartService cartService;
+
+
+    /**
+     * 订单服务调用：【购物车页面点击确认订单时】
+     * 返回所有选中的商品项【从redis中取】
+     * 并且要获取最新的商品价格信息，而不是redis中的数据
+     *
+     * 获取当前用户的购物车所有商品项
+     */
+    @GetMapping(value = "/currentUserCartItems")
+    @ResponseBody
+    public List<CartItemVo> getCurrentCartItems() {
+        List<CartItemVo> cartItemVo = cartService.getUserCartItems();
+        return cartItemVo;
+    }
 
     /**
      * 去购物车页面的请求
@@ -45,7 +58,7 @@ public class CartController {
 
         //1.快速得到用户信息，id,user-key
         //UserInfoTo userInfoTo = CartInterceptor.threadLocal.get();
-        Cart cartVo = cartService.getCart();
+        CartVo cartVo = cartService.getCart();
         model.addAttribute("cart",cartVo);
         return "cartList";
     }
@@ -72,7 +85,7 @@ public class CartController {
     public String addToCartSuccessPage(@RequestParam("skuId") Long skuId,
                                        Model model){
         //重定向到成功页面。再次查询购物车数据即可
-        CartItem cartItemVo = cartService.getCartItem(skuId);
+        CartItemVo cartItemVo = cartService.getCartItem(skuId);
         model.addAttribute("cartItem",cartItemVo);
         return "success";
     }

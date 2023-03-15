@@ -1,9 +1,13 @@
 #配置数据库驱动
 spring:
+  # Spring
+#  main:
+    # 解决 Seata 循环依赖问题
+#    allow-circular-references: true
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.12.132:3306/gulimall_wms
+    url: jdbc:mysql://192.168.12.128:3306/gulimall_wms
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
@@ -11,6 +15,24 @@ spring:
         server-addr: 127.0.0.1:8848
   application:
     name: gulimall-ware
+
+  rabbitmq:
+    host: 192.168.12.128
+    port: 5672
+    virtual-host: /
+    #确认消息已发送到交换机（Exchange）选择确认类型为交互
+    #publisher-confirms: true
+    publisher-confirm-type: correlated
+    # 开启发送端消息抵达Queue确认
+    publisher-returns: true
+    # 只要消息抵达Queue，就会异步发送优先回调returnfirm
+    template:
+      mandatory: true
+    # 使用手动ack确认模式，关闭自动确认【消息丢失】
+    listener:
+      simple:
+        acknowledge-mode: manual
+
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
 
@@ -22,7 +44,7 @@ mybatis-plus:
     db-config:
       id-type: auto
 server:
-  port: 13000
+  port: 13001
 logging:
   level:
     com.xie: debug

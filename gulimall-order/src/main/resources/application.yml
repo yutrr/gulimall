@@ -1,22 +1,62 @@
-server:
-  port: 9000
+#server:
+#  port: 9000
+
 #配置数据库驱动
-spring:
-  datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.12.132:3306/gulimall_oms
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-  application:
-    name: gulimall-order
+#spring:
+#  datasource:
+#    username: root
+#    password: root
+#    url: jdbc:mysql://192.168.12.128:3306/gulimall_oms
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 127.0.0.1:8848
+#  application:
+#    name: gulimall-order
+#  rabbitmq:
+#    host: 192.168.12.128
+#    port: 5672
+#    virtual-host: /
+#    #确认消息已发送到交换机（Exchange）选择确认类型为交互
+#    #publisher-confirms: true
+#    publisher-confirm-type: correlated
+#    # 开启发送端消息抵达Queue确认
+#    publisher-returns: true
+#    # 只要消息抵达Queue，就会异步发送优先回调returnfirm
+#    template:
+#      mandatory: true
+#    # 使用手动ack确认模式，关闭自动确认【消息丢失】
+#    listener:
+#      simple:
+#        acknowledge-mode: manual
+#  thymeleaf:
+#    cache: false
+#  session:
+#    store-type: redis
+#  redis:
+#    host: 192.168.12.128
+#    port: 6379
 
 #mysql映射文件,自增组件
-mybatis-plus:
-  mapper-locations: classpath:/mapper/**/*.xml
-  global-config:
-    db-config:
-      id-type: auto
+#mybatis-plus:
+#  mapper-locations: classpath:/mapper/**/*.xml
+#  global-config:
+#    db-config:
+#      id-type: auto
+#gulimall:
+#  thread:
+#    core-size: 20
+#    max-size: 200
+#    keep-alive-time: 10
+
+alipay:
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyXlglKorHdnV87rB43B7n6jrroRhzbZDwDuPE9NkHEe4Mf32QZpSIawZq1SgBBWhywEn2HI2RlMUNzfNvuBdzKT+kfSQ2wpRUZjrIcU5sw/HYTnAvnoOn26N2mKuLkO/6GurKseUR55fPRVS/xLNESH05B/KdefktYIV5tREerImhuNpcnbq0AsxCFl8h3wYpP6P0dWZKGkW0eZWvhmGrOJy7MUqy7YVVaSqn4KmD/GZoWeKCk/E1nTNGb/sJJ69zOpD4Ld0wjIJFzKCCsnJh3RVaWdvml4RGV6kJB53vIBpC6z9IFZMX1V6fN9UWaKTU3LGRlIZwVZebNo24E7JfQIDAQAB
+  app_id: 2021000119617899
+  charset: utf-8
+  gatewayUrl: https://openapi.alipaydev.com/gateway.do
+  merchant_private_key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC35lDt902o3U+Ryt67HN3c2GqlpvqM+xCAQlehUA+89E+OT+r7zmS02szgzgPa9oW1pCn1qqX2+Pu7Tqo+dvG2rXHCpbD9WX4kcrJGYYrvYPpB1PHJhOu8XFvSYijAGI4F4VcqOdHjYNVFWVi49V0Rq5ZFJ4y6yfl//TvMXMhD6ExN5D+9382CqMgo/e2Zr0qcdldosLlzvbOZ6zXoAgwixU7xNTj767evtYqJ/3ZKoZs0zPfxMgbQMb9uw0e0J38UWxKnUyE6+AxNz6ER49JxVToN3h/DnHe3UK73uWFNMITKnUEqSweIK5N9Qg5atigcwn4P5D9tI8kNzxRZC54bAgMBAAECggEAA1VleirVeY4pdxcaWoH3c51osYAJYqzaa7jIJeBxqJc1KftA4zemk7Czrg+N+lYlrlk/eXiScZup1IdkhqVZVFpoiYK/ZphMtRRvLt9tyVEUuETH7UM/kraJ45Jr8q9/Q5QGJHnP2DNVKmCoPxITkdJucup4npoyr6NDhjzYVILFib0BJiMWZZlXjXaDTBe2j6p9uLEYfAuC+vCOwD0PEKzzcqO95QrFZvmNIw/+H+vBPWuwgdu77IyK9VPDx7ayiSdDWZQ0I9EUddStCWxCJ8g9CuZbZXt3sKdstTp+AiA7tG5VZe+zyXpNpjDOv2ivq4Dfgopb0TUoB47mbRjXoQKBgQD8/FqxNTwBQotXr7GS02NGejvYgVOqZPHiE+IvQAKxyDAwPucQIxRk8q4Y0wN82blTyvA1NV252nVV5bTJcafHlf52ZTTVaRo1KqEM57JI3+oPzoqhry8ONDox371XfhZ9VxhtU/FD6ovcGY+ud1UYyLSlNFzPLyjiKc8nwjlAtwKBgQC6Fz0VLvIe2ZlP+iVnJHaKu23p9kWIWOzIYDV7tdRnxXYQIav/TexYZVXbmkvhUzIoIUIOQISd7Cdmi+rqHcNTigqdzP0r7FMBm5xKclGFP+ETKQt0oghPoJXDohHAaOiA1+2XcUPYDF2IvM96j+RGc9RPEkqX/EMKE6NEgkrhvQKBgCBWPV1zWYUrtVXy/javUHw8uZOWDFS2bHiiZAH4I6AH36j7EVvtr/irUHeZ2VNHHTpJsWSLurw74U2me/JX1cNcN9d4XkV9Fr1/AnD82LwZ6vg0RWIfW1tsb5faaoBZfJRu4o9u8GLnAxOSLNx3Imh1lymaxNYyx/4IrBL/74OHAoGBAJS0ETmmRBBm7d49FDpxptCBqfl1tGaaOMx+JP7wdAVgg1GstpbTG/QfNhbAG7a5FrF+shxVbiQMHAgT8uqWUgmlm4oxznWU6Ve1k5Th+UaznxYCjIbtHBsVRdgI4IqSyoh7A/8qoX45k1y7FEjqRw4NbTCqezUsfh3FR4htXY05AoGAf/8v3FPG4Bsf/+pgjas4T4nsQysG9ofNR5IdqFapUOqZIKsdq7z1LxTveWgU80uCAw7EKwYigV8wPCcntgeU4CzeL+3smoBAnpRqfEuSO9Is7P7aIl1A6zJgCwCo70ovpq8r58Vdmh9zUPPQFxGrFuF2vG0eHcabgjbQlWusgCY=
+  #此处先使用demo的回调接口页面
+  notify_url: https://51m6p81252.yicp.fun/alipay.trade.page.pay-JAVA-UTF-8/notify_url.jsp
+  return_url: https://member.gulimall.com/memberOrder.html
+  sign_type: RSA2

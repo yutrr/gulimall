@@ -8,8 +8,8 @@ import com.xie.common.utils.R;
 import com.xie.gulimall.cart.feign.ProductFeignService;
 import com.xie.gulimall.cart.interceptor.CartInterceptor;
 import com.xie.gulimall.cart.service.CartService;
-import com.xie.gulimall.cart.vo.Cart;
-import com.xie.gulimall.cart.vo.CartItem;
+import com.xie.gulimall.cart.vo.CartVo;
+import com.xie.gulimall.cart.vo.CartItemVo;
 import com.xie.gulimall.cart.vo.SkuInfoVo;
 import com.xie.gulimall.cart.vo.UserInfoTo;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +19,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -46,7 +47,7 @@ public class CartServiceImpl implements CartService {
 
 
     @Override
-    public CartItem addToCart(Long skuId, Integer num) throws ExecutionException, InterruptedException {
+    public CartItemVo addToCart(Long skuId, Integer num) throws ExecutionException, InterruptedException {
         BoundHashOperations<String, Object, Object> cartOps = getCartOps();
 
 
@@ -54,47 +55,47 @@ public class CartServiceImpl implements CartService {
         if (BeanUtil.isEmpty(res)){
             //购物车无此商品
             //2.添加新商品到购物车
-            CartItem cartItem = new CartItem();
+            CartItemVo cartItemVo = new CartItemVo();
             CompletableFuture<Void> getSkuInfoTask = CompletableFuture.runAsync(() -> {
                 //1.远程查询当前要添加的商品信息
                 R skuInfo = productFeignService.getSkuInfo(skuId);
                 SkuInfoVo data = skuInfo.getData("skuInfo", new TypeReference<SkuInfoVo>() {
                 });
-                cartItem.setCheck(true);
-                cartItem.setCount(num);
-                cartItem.setImage(data.getSkuDefaultImg());
-                cartItem.setSkuId(skuId);
-                cartItem.setPrice(data.getPrice());
-                cartItem.setTitle(data.getSkuTitle());
+                cartItemVo.setCheck(true);
+                cartItemVo.setCount(num);
+                cartItemVo.setImage(data.getSkuDefaultImg());
+                cartItemVo.setSkuId(skuId);
+                cartItemVo.setPrice(data.getPrice());
+                cartItemVo.setTitle(data.getSkuTitle());
             },executor);
 
             //3.远程查询sku的组合信息
             CompletableFuture<Void> getSkuSaleAttrValues = CompletableFuture.runAsync(() -> {
                 List<String> values = productFeignService.getSkuSaleAttrValues(skuId);
-                cartItem.setSkuAttr(values);
+                cartItemVo.setSkuAttr(values);
             }, executor);
 
             CompletableFuture.allOf(getSkuInfoTask,getSkuSaleAttrValues).get();
-            String s = JSON.toJSONString(cartItem);
+            String s = JSON.toJSONString(cartItemVo);
             cartOps.put(skuId.toString(),s);
-            return cartItem;
+            return cartItemVo;
         } else {
             //购物车有此商品，修改数量
-          CartItem  cartItem = JSON.parseObject(res, CartItem.class);
-            cartItem.setCount(cartItem.getCount()+num);
-            cartOps.put(skuId.toString(),JSON.toJSONString(cartItem));
-            return cartItem;
+          CartItemVo cartItemVo = JSON.parseObject(res, CartItemVo.class);
+            cartItemVo.setCount(cartItemVo.getCount()+num);
+            cartOps.put(skuId.toString(),JSON.toJSONString(cartItemVo));
+            return cartItemVo;
         }
 
 
     }
 
     @Override
-    public CartItem getCartItem(Long skuId) {
+    public CartItemVo getCartItem(Long skuId) {
         BoundHashOperations<String, Object, Object> cartOps = getCartOps();
         String str = (String) cartOps.get(skuId.toString());
-        CartItem cartItem = JSON.parseObject(str, CartItem.class);
-        return cartItem;
+        CartItemVo cartItemVo = JSON.parseObject(str, CartItemVo.class);
+        return cartItemVo;
     }
 
     /**
@@ -103,8 +104,8 @@ public class CartServiceImpl implements CartService {
      * 【整合登录状态与未登录状态】
      */
     @Override
-    public Cart getCart() throws ExecutionException, InterruptedException {
-        Cart cart = new Cart();
+    public CartVo getCart() throws ExecutionException, InterruptedException {
+        CartVo cartVo = new CartVo();
         UserInfoTo userInfoTo = CartInterceptor.threadLocal.get();
         System.out.println(userInfoTo);
         if (userInfoTo.getUserId() != null) {
@@ -113,26 +114,26 @@ public class CartServiceImpl implements CartService {
             //  2）、临时购物车的key
             String temptCartKey = CartConstant.CART_PREFIX + userInfoTo.getUserKey();
             //2、如果临时购物车的数据还未进行合并
-            List<CartItem> tempCartItems = getCartItems(temptCartKey);
-            if (tempCartItems != null) {
+            List<CartItemVo> tempCartItemVos = getCartItems(temptCartKey);
+            if (tempCartItemVos != null) {
                 //临时购物车有数据需要进行合并操作
-                for (CartItem item : tempCartItems) {
+                for (CartItemVo item : tempCartItemVos) {
                     addToCart(item.getSkuId(),item.getCount());
                 }
                 //清除临时购物车的数据
                 clearCartInfo(temptCartKey);
             }
             //3、获取登录后的购物车数据【包含合并过来的临时购物车的数据和登录后购物车的数据】
-            List<CartItem> cartItems = getCartItems(cartKey);
-            cart.setItems(cartItems);
+            List<CartItemVo> cartItemVos = getCartItems(cartKey);
+            cartVo.setItems(cartItemVos);
         } else {
             //没登录
             String cartKey = CartConstant.CART_PREFIX + userInfoTo.getUserKey();
             //获取临时购物车里面的所有购物项
-            List<CartItem> cartItems = getCartItems(cartKey);
-            cart.setItems(cartItems);
+            List<CartItemVo> cartItemVos = getCartItems(cartKey);
+            cartVo.setItems(cartItemVos);
         }
-        return cart;
+        return cartVo;
     }
 
     private BoundHashOperations<String, Object, Object> getCartOps() {
@@ -155,17 +156,17 @@ public class CartServiceImpl implements CartService {
      * @param cartKey
      * @return
      */
-    public List<CartItem> getCartItems(String cartKey){
+    public List<CartItemVo> getCartItems(String cartKey){
         BoundHashOperations<String, Object, Object> operations =
                 redisTemplate.boundHashOps(cartKey);
         List<Object> values = operations.values();
         if (values!=null&&values.size()>0){
-            List<CartItem> cartItemsStream = values.stream().map((obj) -> {
+            List<CartItemVo> cartItemsStreamVo = values.stream().map((obj) -> {
                 String str = (String) obj;
-                CartItem cartItem = JSON.parseObject(str, CartItem.class);
-                return cartItem;
+                CartItemVo cartItemVo = JSON.parseObject(str, CartItemVo.class);
+                return cartItemVo;
             }).collect(Collectors.toList());
-            return cartItemsStream;
+            return cartItemsStreamVo;
         }
         return null;
     }
@@ -177,12 +178,12 @@ public class CartServiceImpl implements CartService {
     @Override
     public void checkItem(Long skuId, Integer check) {
         //查询购物车里面的商品
-        CartItem cartItem = getCartItem(skuId);
+        CartItemVo cartItemVo = getCartItem(skuId);
         //修改商品状态
-        cartItem.setCheck(check == 1?true:false);
+        cartItemVo.setCheck(check == 1?true:false);
 
         //序列化存入redis中
-        String redisValue = JSON.toJSONString(cartItem);
+        String redisValue = JSON.toJSONString(cartItemVo);
 
         BoundHashOperations<String, Object, Object> cartOps = getCartOps();
         cartOps.put(skuId.toString(),redisValue);
@@ -196,11 +197,11 @@ public class CartServiceImpl implements CartService {
     @Override
     public void changeItemCount(Long skuId, Integer num) {
         //查询购物车里面的商品
-        CartItem cartItem = getCartItem(skuId);
-        cartItem.setCount(num);
+        CartItemVo cartItemVo = getCartItem(skuId);
+        cartItemVo.setCount(num);
         BoundHashOperations<String, Object, Object> cartOps = getCartOps();
         //序列化存入redis中
-        String redisValue = JSON.toJSONString(cartItem);
+        String redisValue = JSON.toJSONString(cartItemVo);
         cartOps.put(skuId.toString(),redisValue);
     }
 
@@ -215,7 +216,30 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartItem> getUserCartItems() {
-        return null;
+    public List<CartItemVo> getUserCartItems() {
+        UserInfoTo userInfoTo = CartInterceptor.threadLocal.get();
+        if (userInfoTo==null){
+            return null;
+        }else {
+            //获取购物车项
+            String cartKey = CartConstant.CART_PREFIX + userInfoTo.getUserId();
+            //获取所有的
+            List<CartItemVo> cartItems = getCartItems(cartKey);
+            if (cartKey==null){
+                return null;
+            }
+            //筛选出被选中的购物项
+            List<CartItemVo> collect = cartItems.stream()
+                    .filter(items -> items.getCheck())
+                    .map(item->{
+                        //更新为最新的价格（查询数据库）
+                        // redis中的价格不是最新的
+                       R price= productFeignService.getPrice(item.getSkuId());
+                        item.setPrice(new BigDecimal((String)price.get("data")));
+                        return item;
+                    })
+                    .collect(Collectors.toList());
+            return cartItems;
+        }
     }
 }

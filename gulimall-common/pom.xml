@@ -19,6 +19,24 @@
 
 
     <dependencies>
+        <!--seata 分布式事务-->
+        <!--不使用的模块要排除掉-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.seata</groupId>
+                    <artifactId>seata-all</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--        使用与事务协调器版本相同的-->
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-all</artifactId>
+            <version>0.7.1</version>
+        </dependency>
         <!--        mybatis-plus-->
         <dependency>
             <groupId>com.baomidou</groupId>

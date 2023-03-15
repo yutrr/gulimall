@@ -1,7 +1,7 @@
 package com.xie.gulimall.cart.service;
 
-import com.xie.gulimall.cart.vo.Cart;
-import com.xie.gulimall.cart.vo.CartItem;
+import com.xie.gulimall.cart.vo.CartVo;
+import com.xie.gulimall.cart.vo.CartItemVo;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -15,20 +15,20 @@ public interface CartService {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    CartItem addToCart(Long skuId, Integer num) throws ExecutionException, InterruptedException;
+    CartItemVo addToCart(Long skuId, Integer num) throws ExecutionException, InterruptedException;
 
     /**
      * 获取购物车中的某个购物项
      * @param skuId
      * @return
      */
-    CartItem getCartItem(Long skuId);
+    CartItemVo getCartItem(Long skuId);
 
     /**
      * 获取整个购物车
      * @return
      */
-    Cart getCart() throws ExecutionException, InterruptedException;
+    CartVo getCart() throws ExecutionException, InterruptedException;
 
     /**
      * 清空购物车数据
@@ -61,6 +61,6 @@ public interface CartService {
      * 获取当前用户的购物车所有商品项
      * @return
      */
-    List<CartItem> getUserCartItems();
+    List<CartItemVo> getUserCartItems();
 
 }
