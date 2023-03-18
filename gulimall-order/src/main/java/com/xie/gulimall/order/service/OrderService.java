@@ -6,6 +6,7 @@ import com.xie.gulimall.order.config.AlipayTemplate;
 import com.xie.gulimall.order.entity.OrderEntity;
 import com.xie.gulimall.order.vo.OrderConfirmVo;
 import com.xie.gulimall.order.vo.OrderSubmitVo;
+import com.xie.gulimall.order.vo.PayAsyncVo;
 import com.xie.gulimall.order.vo.SubmitOrderResponseVo;
 
 import java.util.Map;
@@ -47,5 +48,8 @@ public interface OrderService extends IService<OrderEntity> {
     AlipayTemplate.PayVo getOrderPay(String orderSn);
 
     PageUtils queryPageWithItem(Map<String, Object> params);
+
+    String handlePayResult(PayAsyncVo asyncVo);
+
 }
 
