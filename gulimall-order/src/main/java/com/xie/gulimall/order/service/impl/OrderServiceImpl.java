@@ -4,6 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.xie.common.exception.NoStockException;
 import com.xie.common.to.mq.OrderTo;
+import com.xie.common.to.mq.SeckillOrderTo;
 import com.xie.common.utils.R;
 import com.xie.common.vo.MemberResponseVo;
 import com.xie.gulimall.order.config.AlipayTemplate;
@@ -370,6 +371,45 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
             this.updateOrderStatus(orderSn,OrderStatusEnum.PAYED.getCode(), PayConstant.ALIPAY);
         }
         return "success";
+    }
+
+
+    /**
+     * 创建秒杀单
+     * @param seckillOrderTo
+     */
+    @Override
+    public void createSeckillOrder(SeckillOrderTo seckillOrderTo) {
+        //TODO 保存订单信息
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderSn(seckillOrderTo.getOrderSn());
+        orderEntity.setMemberId(seckillOrderTo.getMemberId());
+        orderEntity.setCreateTime(new Date());
+        BigDecimal totalPrice = seckillOrderTo.getSeckillPrice().multiply(BigDecimal.valueOf(seckillOrderTo.getNum()));
+        orderEntity.setPayAmount(totalPrice);
+        orderEntity.setStatus(OrderStatusEnum.CREATE_NEW.getCode());
+
+        //保存订单
+        this.save(orderEntity);
+
+        //保存订单项信息
+        OrderItemEntity orderItem = new OrderItemEntity();
+        orderItem.setOrderSn(seckillOrderTo.getOrderSn());
+        orderItem.setRealAmount(totalPrice);
+
+        orderItem.setSkuQuantity(seckillOrderTo.getNum());
+
+        //保存商品的spu信息
+        R spuInfo = productFeignService.getSpuInfoBySkuId(seckillOrderTo.getSkuId());
+        SpuInfoVo spuInfoData = spuInfo.getData("data", new TypeReference<SpuInfoVo>() {
+        });
+        orderItem.setSpuId(spuInfoData.getId());
+        orderItem.setSpuName(spuInfoData.getSpuName());
+        orderItem.setSpuBrand(spuInfoData.getBrandName());
+        orderItem.setCategoryId(spuInfoData.getCatalogId());
+
+        //保存订单项数据
+        orderItemService.save(orderItem);
     }
 
     /**

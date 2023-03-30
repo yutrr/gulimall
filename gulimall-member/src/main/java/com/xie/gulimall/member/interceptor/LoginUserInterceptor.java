@@ -8,6 +8,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 /**
@@ -27,7 +28,7 @@ public class LoginUserInterceptor implements HandlerInterceptor {
         if (match){
             return true;
         }
-
+        HttpSession session = request.getSession();
 
         MemberResponseVo memberResponseVo = (MemberResponseVo) request.getSession().getAttribute(AuthServerConstant.LOGIN_USER);
         if (memberResponseVo!=null){

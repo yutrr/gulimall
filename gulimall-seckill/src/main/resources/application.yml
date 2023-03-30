@@ -1,0 +1,29 @@
+server:
+  port: 25000
+spring:
+  application:
+    name: gulimall-seckill
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  redis:
+    host: 192.168.12.128
+    port: 6379
+
+
+  task:
+    execution:
+      pool:
+        core-size: 8  #默认大小为8
+        max-size: 50  #默认最大为int
+  session:
+    store-type: redis
+
+  rabbitmq:
+    host: 192.168.12.128
+    port: 5672
+    virtual-host: /
+    #开发环境关闭缓存
+  thymeleaf:
+    cache: false

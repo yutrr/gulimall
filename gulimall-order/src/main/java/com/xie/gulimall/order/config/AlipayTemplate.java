@@ -41,7 +41,7 @@ public class AlipayTemplate {
     private  String charset;
 
     //订单超时时间
-    private String timeout = "1m";
+    private String timeout = "10m";
 
     // 支付宝网关； https://openapi.alipaydev.com/gateway.do
     public String gatewayUrl;

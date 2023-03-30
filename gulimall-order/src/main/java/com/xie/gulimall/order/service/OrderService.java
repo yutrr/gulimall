@@ -1,6 +1,7 @@
 package com.xie.gulimall.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xie.common.to.mq.SeckillOrderTo;
 import com.xie.common.utils.PageUtils;
 import com.xie.gulimall.order.config.AlipayTemplate;
 import com.xie.gulimall.order.entity.OrderEntity;
@@ -51,5 +52,6 @@ public interface OrderService extends IService<OrderEntity> {
 
     String handlePayResult(PayAsyncVo asyncVo);
 
+    void createSeckillOrder(SeckillOrderTo seckillOrderTo);
 }
 
