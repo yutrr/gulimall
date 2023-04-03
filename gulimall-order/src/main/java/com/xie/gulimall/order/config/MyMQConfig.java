@@ -35,7 +35,7 @@ public class MyMQConfig {
         HashMap<String, Object> arguments = new HashMap<>();
         arguments.put("x-dead-letter-exchange", "order-event-exchange");// 死信路由
         arguments.put("x-dead-letter-routing-key", "order.release.order");// 死信路由键
-        arguments.put("x-message-ttl", 600000); // 消息过期时间 10 分钟
+        arguments.put("x-message-ttl", 60000); // 消息过期时间 1 分钟
         /*
             Queue(String name,  队列名字
             boolean durable,  是否持久化

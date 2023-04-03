@@ -1,5 +1,5 @@
 server:
-  port: 25000
+  port: 25010
 spring:
   application:
     name: gulimall-seckill
