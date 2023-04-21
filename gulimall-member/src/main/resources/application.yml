@@ -32,3 +32,17 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   session:
     store-type: redis
+
+
+  zipkin:
+    #链路追踪可视化zipkin服务器
+    base-url: http://192.168.12.128:9411/
+    #关闭服务发现，否则spring cloud会把zipkin的url当做服务名称
+    discovery-client-enabled: false
+    #设置使用http的方式传输数据
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      #设置抽样采集率为100%，默认0.1
+      probability: 1

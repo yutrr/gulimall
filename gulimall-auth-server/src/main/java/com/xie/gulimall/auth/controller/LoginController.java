@@ -62,7 +62,7 @@ public class LoginController {
             long l = Long.parseLong(redisCode.split("_")[1]);
             if (System.currentTimeMillis()-l<60000){
                 //60s内不能再发
-                return R.error(BizCodeEnume.SMS_CODE_EXECPTION.getCode(),BizCodeEnume.SMS_CODE_EXECPTION.getMsg());
+                return R.error(BizCodeEnume.SMS_CODE_EXCEPTION.getCode(),BizCodeEnume.SMS_CODE_EXCEPTION.getMsg());
             }
         }
         //2.验证码的再次校验. 存key-phone,value-code  sms:code:19942178172 ->456789

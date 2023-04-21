@@ -56,6 +56,12 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
+        <!--springboot 收集健康状况信息，提供给sentinel使用-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!-- 模板引擎 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

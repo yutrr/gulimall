@@ -12,6 +12,7 @@ import com.xie.gulimall.product.vo.SkuItemVo;
 import com.xie.gulimall.product.vo.SpuItemAttrGroupVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -29,6 +30,8 @@ import com.xie.common.utils.Query;
 
 import com.xie.gulimall.product.dao.SkuInfoDao;
 import com.xie.gulimall.product.entity.SkuInfoEntity;
+
+import javax.annotation.Resource;
 
 
 @Service("skuInfoService")
@@ -162,10 +165,10 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
         // 3、查询当前sku是否参与秒杀活动
         CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
             //3、远程调用查询当前sku是否参与秒杀优惠活动
-            R skuSeckilInfo = seckillFeignService.getSkuSeckilInfo(skuId);
-            if (skuSeckilInfo.getCode() == 0) {
+            R skuSeckillInfo = seckillFeignService.getSkuSeckilInfo(skuId);
+            if (skuSeckillInfo.getCode() == 0) {
                 //查询成功
-                SeckillSkuVo seckilInfoData = skuSeckilInfo.getData("data", new TypeReference<SeckillSkuVo>() {
+                SeckillSkuVo seckilInfoData = skuSeckillInfo.getData("data", new TypeReference<SeckillSkuVo>() {
                 });
                 skuItemVo.setSeckillSkuVo(seckilInfoData);
 

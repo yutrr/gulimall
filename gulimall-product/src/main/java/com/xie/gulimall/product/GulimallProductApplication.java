@@ -110,6 +110,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
  *  ->就会应用到当前RedisCacheManager管理的所有缓存分区中
  */
 @EnableRedisHttpSession
+@EnableCaching
 @EnableFeignClients(basePackages = "com.xie.gulimall.product.feign")
 @EnableDiscoveryClient
 @SpringBootApplication

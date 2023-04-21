@@ -15,7 +15,7 @@ import lombok.Data;
  * @email xiehaijun@gmail.com
  * @date 2022-07-07 17:58:59
  */
-@Data
+
 @TableName("pms_attr_group")
 public class AttrGroupEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -49,4 +49,59 @@ public class AttrGroupEntity implements Serializable {
 	@TableField(exist = false)
 	private Long[] catelogPath;
 
+	public Long getAttrGroupId() {
+		return attrGroupId;
+	}
+
+	public void setAttrGroupId(Long attrGroupId) {
+		this.attrGroupId = attrGroupId;
+	}
+
+	public String getAttrGroupName() {
+		return attrGroupName;
+	}
+
+	public void setAttrGroupName(String attrGroupName) {
+		this.attrGroupName = attrGroupName;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
+	public String getDescript() {
+		return descript;
+	}
+
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public Long getCatelogId() {
+		return catelogId;
+	}
+
+	public void setCatelogId(Long catelogId) {
+		this.catelogId = catelogId;
+	}
+
+	public Long[] getCatelogPath() {
+		return catelogPath;
+	}
+
+	public void setCatelogPath(Long[] catelogPath) {
+		this.catelogPath = catelogPath;
+	}
 }

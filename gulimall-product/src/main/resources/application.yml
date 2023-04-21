@@ -1,40 +1,45 @@
-#server:
-#  port: 13000
+server:
+  port: 13000
 #配置数据库驱动
 spring:
-#  datasource:
-#    username: root
-#    password: root
-#    url: jdbc:mysql://192.168.12.128:3306/gulimall_pms
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: 127.0.0.1:8848
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.12.128:3306/gulimall_pms
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
     alicloud:
       access-key: LTAI5t98asXtYiMCQ9Q4pENW
       secret-key: iaOQszsBuibYx7hTEfi6F4jjnlReeA
       oss:
         endpoint: oss-cn-guangzhou.aliyuncs.com
-#  application:
-#    name: gulimall-product
+  application:
+    name: gulimall-product
 
-#  jackson:
-#    date-format: yyyy-MM-dd HH:mm:ss
-#  thymeleaf:
-#    cache: false
-#  redis:
-#    host: 192.168.12.128
-#    port: 6379
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+    cache: false
+  redis:
+    host: 192.168.12.128
+    port: 6379
 
 #mysql映射文件,自增组件
-#mybatis-plus:
-#  mapper-locations: classpath:/mapper/**/*.xml
-#  global-config:
-#    db-config:
-#      id-type: auto
-#      logic-delete-value: 1
-#      logic-not-delete-value: 0
-#logging:
-#  level:
-#    com.xie.gulimall: error
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+logging:
+  level:
+    com.xie.gulimall: error
+
+    #开启sentinel监控并熔断feign调用开启会报错，可能是springcloud版本问题
+#feign:
+#  sentinel:
+#    enabled: true

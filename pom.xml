@@ -8,6 +8,12 @@
     <name>gulimall</name>
     <description>谷粒商城-聚合服务</description>
     <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <modules>
         <module>gulimall-coupon</module>
         <module>gulimall-member</module>
@@ -17,5 +23,11 @@
         <module>renren-fast</module>
         <module>renren-generator</module>
         <module>gulimall-common</module>
+        <module>gulimall-gateway</module>
+        <module>gulimall-third-party</module>
+        <module>gulimall-search</module>
+        <module>gulimall-auth-server</module>
+        <module>gulimall-cart</module>
+        <module>gulimall-seckill</module>
     </modules>
 </project>

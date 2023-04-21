@@ -24,9 +24,8 @@ import javax.validation.constraints.*;
  * @email xiehaijun@gmail.com
  * @date 2022-07-07 17:58:59
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
+
 @TableName("pms_brand")
 public class BrandEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -72,4 +71,73 @@ public class BrandEntity implements Serializable {
 	@Min(value = 0,message = "排序必须大于等于0",groups = {UpdateGroup.class,AddGroup.class})
 	private Integer sort;
 
+
+	public BrandEntity() {
+	}
+
+	public BrandEntity(Long brandId, String name, String logo, String descript, Integer showStatus, String firstLetter, Integer sort) {
+		this.brandId = brandId;
+		this.name = name;
+		this.logo = logo;
+		this.descript = descript;
+		this.showStatus = showStatus;
+		this.firstLetter = firstLetter;
+		this.sort = sort;
+	}
+
+	public Long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public String getDescript() {
+		return descript;
+	}
+
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+
+	public Integer getShowStatus() {
+		return showStatus;
+	}
+
+	public void setShowStatus(Integer showStatus) {
+		this.showStatus = showStatus;
+	}
+
+	public String getFirstLetter() {
+		return firstLetter;
+	}
+
+	public void setFirstLetter(String firstLetter) {
+		this.firstLetter = firstLetter;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
 }

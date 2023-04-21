@@ -8,7 +8,6 @@ import lombok.Data;
  * @Date: 2022/8/12 18:50
  * @Version 1.0
  */
-@Data
 public class BrandVo {
     /**
      * "brandId": 0,
@@ -16,4 +15,20 @@ public class BrandVo {
      */
     private Long brandId;
     private String brandName;
+
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
 }
