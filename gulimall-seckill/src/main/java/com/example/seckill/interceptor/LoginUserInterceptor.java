@@ -1,9 +1,10 @@
 package com.example.seckill.interceptor;
 
-import cn.hutool.core.text.AntPathMatcher;
+
 import com.xie.common.constant.AuthServerConstant;
 import com.xie.common.vo.MemberResponseVo;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;

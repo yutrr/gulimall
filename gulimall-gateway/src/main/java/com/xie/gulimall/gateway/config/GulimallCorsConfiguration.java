@@ -24,8 +24,8 @@ public class GulimallCorsConfiguration {
         //1.配置跨域
         corsConfiguration.addAllowedHeader("*");//允许哪些头进行跨域
         corsConfiguration.addAllowedMethod("*");//允许哪些请求方式进行跨域
-        //corsConfiguration.addAllowedOrigin("*");//允许哪个请求来源进行跨域
-        corsConfiguration.addAllowedOriginPattern("*");
+        corsConfiguration.addAllowedOrigin("*");//允许哪个请求来源进行跨域
+        //corsConfiguration.addAllowedOriginPattern("*");
         corsConfiguration.setAllowCredentials(true);//是否允许携带cook进行跨域
         source.registerCorsConfiguration("/**",corsConfiguration);
 

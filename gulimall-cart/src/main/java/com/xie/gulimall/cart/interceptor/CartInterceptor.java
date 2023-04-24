@@ -7,10 +7,10 @@ package com.xie.gulimall.cart.interceptor;
  * @Version 1.0
  */
 
-import cn.hutool.core.bean.BeanUtil;
 import com.xie.common.constant.AuthServerConstant;
 import com.xie.common.constant.CartConstant;
 import com.xie.gulimall.cart.vo.UserInfoTo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import com.xie.common.vo.MemberResponseVo;
@@ -59,7 +59,7 @@ public class CartInterceptor implements HandlerInterceptor {
         }
 
         //如果没有临时用户，一定分配一个临时用户
-        if (BeanUtil.isEmpty(userInfoTo.getUserKey())){
+        if (StringUtils.isEmpty(userInfoTo.getUserKey())){
             String uuid = UUID.randomUUID().toString();
             userInfoTo.setUserKey(uuid);
         }

@@ -1,6 +1,5 @@
 package com.xie.gulimall.product.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.xie.gulimall.product.service.CategoryBrandRelationService;
@@ -214,7 +213,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         //1.加入缓存逻辑,缓存中存的数据是json字符串
         //JSON跨语言，跨平台兼容
         String catalogJson = redisTemplate.opsForValue().get("catalogJson");
-        if (BeanUtil.isEmpty(catalogJson)) {
+        if (!StringUtils.isEmpty(catalogJson)) {
             //2.缓存中没有，查询数据库
             System.out.println("缓存不命中....将要查询数据库.....");
             Map<String, List<Catelog2Vo>> catalogJsonFromDb = getCatalogJsonFromDbWithRedisLock();
@@ -303,7 +302,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
     private Map<String, List<Catelog2Vo>> getDataFromDb() {
         String catalogJson = redisTemplate.opsForValue().get("catalogJson");
-        if (!BeanUtil.isEmpty(catalogJson)) {
+        if (!StringUtils.isEmpty(catalogJson)) {
             //缓存不为null直接返回
             Map<String, List<Catelog2Vo>> result = JSON.parseObject(catalogJson, new TypeReference<Map<String, List<Catelog2Vo>>>() {
             });
@@ -366,7 +365,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         synchronized (this) {
             //得到锁以后，我们应该再去缓存中确定一次，如果没有才需要继续查询
             String catalogJson = redisTemplate.opsForValue().get("catalogJson");
-            if (!BeanUtil.isEmpty(catalogJson)) {
+            if (!StringUtils.isEmpty(catalogJson)) {
                 //缓存不为null直接返回
                 Map<String, List<Catelog2Vo>> result = JSON.parseObject(catalogJson, new TypeReference<Map<String, List<Catelog2Vo>>>() {
                 });

@@ -1,6 +1,6 @@
 package com.xie.gulimall.cart.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.xie.common.constant.CartConstant;
@@ -13,6 +13,7 @@ import com.xie.gulimall.cart.vo.CartItemVo;
 import com.xie.gulimall.cart.vo.SkuInfoVo;
 import com.xie.gulimall.cart.vo.UserInfoTo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -52,7 +53,7 @@ public class CartServiceImpl implements CartService {
 
 
         String res = (String) cartOps.get(skuId.toString());
-        if (BeanUtil.isEmpty(res)){
+        if (StringUtils.isEmpty(res)){
             //购物车无此商品
             //2.添加新商品到购物车
             CartItemVo cartItemVo = new CartItemVo();

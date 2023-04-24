@@ -1,6 +1,6 @@
 package com.xie.gulimall.auth.controller;
 
-import cn.hutool.core.bean.BeanUtil;
+
 import com.alibaba.fastjson.TypeReference;
 import com.xie.common.constant.AuthServerConstant;
 import com.xie.common.exception.BizCodeEnume;
@@ -12,6 +12,7 @@ import com.xie.gulimall.auth.vo.UserRegistVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +59,7 @@ public class LoginController {
 
 
         String redisCode = redisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone);
-        if (!BeanUtil.isEmpty(redisCode)){
+        if (!StringUtils.isEmpty(redisCode)){
             long l = Long.parseLong(redisCode.split("_")[1]);
             if (System.currentTimeMillis()-l<60000){
                 //60s内不能再发
@@ -106,7 +107,7 @@ public class LoginController {
 
         //获取存入Redis里的验证码
         String s = redisTemplate.opsForValue().get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + vo.getPhone());
-        if (!BeanUtil.isEmpty(s)) {
+        if (!StringUtils.isEmpty(s)) {
             if (code.equals(s.split("_")[0])) {
                 //删除验证码；令牌机制
                 redisTemplate.delete(AuthServerConstant.SMS_CODE_CACHE_PREFIX+vo.getCode());

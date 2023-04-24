@@ -53,13 +53,13 @@ public class MyRabbitConfig {
          * exchange：当时这个消息发给哪个交换机
          * routingKey：当时这个消息用哪个路邮键
          */
-        rabbitTemplate.setReturnsCallback(returned -> System.out.println("Fail Message["+returned.getMessage()+"]==>replyCode["+returned.getReplyCode()+"]" +
-                "==>replyText["+returned.getReplyText()+"]==>exchange["+returned.getExchange()+"]==>routingKey["+returned.getRoutingKey()+"]"));
+        /*rabbitTemplate.setReturnsCallback(returned -> System.out.println("Fail Message["+returned.getMessage()+"]==>replyCode["+returned.getReplyCode()+"]" +
+                "==>replyText["+returned.getReplyText()+"]==>exchange["+returned.getExchange()+"]==>routingKey["+returned.getRoutingKey()+"]"));*/
         //已经过时
-        /*rabbitTemplate.setReturnCallback((message,replyCode,replyText,exchange,routingKey) -> {
+        rabbitTemplate.setReturnCallback((message,replyCode,replyText,exchange,routingKey) -> {
             System.out.println("Fail Message["+message+"]==>replyCode["+replyCode+"]" +
                     "==>replyText["+replyText+"]==>exchange["+exchange+"]==>routingKey["+routingKey+"]");
-        });*/
+        });
     }
 
     /**

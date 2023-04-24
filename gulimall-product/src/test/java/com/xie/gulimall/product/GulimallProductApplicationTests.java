@@ -5,7 +5,8 @@ import com.xie.gulimall.product.service.CategoryService;
 import com.xie.gulimall.product.vo.SpuItemAttrGroupVo;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Var;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -40,6 +40,6 @@ logging:
     com.xie.gulimall: error
 
     #开启sentinel监控并熔断feign调用开启会报错，可能是springcloud版本问题
-#feign:
-#  sentinel:
-#    enabled: true
+feign:
+  sentinel:
+    enabled: true

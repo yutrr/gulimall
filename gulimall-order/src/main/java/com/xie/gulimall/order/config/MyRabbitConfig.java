@@ -1,7 +1,6 @@
 package com.xie.gulimall.order.config;
 
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.ReturnedMessage;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -90,13 +89,13 @@ public class MyRabbitConfig {
          * routingKey：当时这个消息用哪个路邮键
          */
         // 需要修改数据库 消息的状态【后期定期重发消息】
-        rabbitTemplate.setReturnsCallback(returned -> System.out.println("Fail Message["+returned.getMessage()+"]==>replyCode["+returned.getReplyCode()+"]" +
-                "==>replyText["+returned.getReplyText()+"]==>exchange["+returned.getExchange()+"]==>routingKey["+returned.getRoutingKey()+"]"));
+        /*rabbitTemplate.setReturnsCallback(returned -> System.out.println("Fail Message["+returned.getMessage()+"]==>replyCode["+returned.getReplyCode()+"]" +
+                "==>replyText["+returned.getReplyText()+"]==>exchange["+returned.getExchange()+"]==>routingKey["+returned.getRoutingKey()+"]"));*/
         //已经过时
-        /*rabbitTemplate.setReturnCallback((message,replyCode,replyText,exchange,routingKey) -> {
+        rabbitTemplate.setReturnCallback((message,replyCode,replyText,exchange,routingKey) -> {
             System.out.println("Fail Message["+message+"]==>replyCode["+replyCode+"]" +
                     "==>replyText["+replyText+"]==>exchange["+exchange+"]==>routingKey["+routingKey+"]");
-        });*/
+        });
     }
 
 }

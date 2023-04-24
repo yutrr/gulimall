@@ -1,6 +1,6 @@
 package com.xie.gulimall.search.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.xie.common.to.es.SkuEsModel;
@@ -98,7 +98,7 @@ public class MallSearchServiceImpl implements MallSearchService {
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
         //1.1构建must【得分】
         //分词匹配skuTitle
-        if (BeanUtil.isNotEmpty(param.getKeyword())){
+        if (!StringUtils.isEmpty(param.getKeyword())){
             boolQuery.must(QueryBuilders.matchQuery("skuTitle",param.getKeyword()));
         }
         //1.2 bool -filter -按照三级分类id查询【无得分】
@@ -136,7 +136,7 @@ public class MallSearchServiceImpl implements MallSearchService {
             boolQuery.filter(QueryBuilders.termQuery("hasStock", param.getHasStock() == 1));
         }
         //1.2 bool -filter -按照价格区间进行查询
-        if (BeanUtil.isNotEmpty(param.getSkuPrice())){
+        if (!StringUtils.isEmpty(param.getSkuPrice())){
             //1-500/_500/500_
             /**
              *  "range": {
@@ -172,7 +172,7 @@ public class MallSearchServiceImpl implements MallSearchService {
          * 排序，分页，高亮，
          */
         //2.1排序
-        if (BeanUtil.isNotEmpty(param.getSort())){
+        if (!StringUtils.isEmpty(param.getSort())){
             String sort = param.getSort();
             //sort-hotScore_asc/desc
             String[] s = sort.split("_");
@@ -188,7 +188,7 @@ public class MallSearchServiceImpl implements MallSearchService {
         sourceBuilder.size(EsConstant.PRODUCT_PAGESIZE);
 
         //2.3高亮
-        if (BeanUtil.isNotEmpty(param.getKeyword())){
+        if (!StringUtils.isEmpty(param.getKeyword())){
             HighlightBuilder builder=new HighlightBuilder();
             builder.field("skuTitle");
             builder.preTags("<b style='color:red'>");
