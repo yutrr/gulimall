@@ -31,6 +31,7 @@ public interface WareSkuService extends IService<WareSkuEntity> {
 
     /**
      * 解锁库存
+     *
      * @param to
      */
     void unlockStock(StockLockedTo to);

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Map;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -31,11 +32,11 @@ public class WareInfoServiceImpl extends ServiceImpl<WareInfoDao, WareInfoEntity
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         QueryWrapper<WareInfoEntity> wrapper = new QueryWrapper<>();
-        String key= (String) params.get("key");
-        if (!StringUtils.isEmpty(key)){
-            wrapper.eq("id",key).or().like("name",key)
-                    .or().like("address",key)
-                    .or().like("areacode",key);
+        String key = (String) params.get("key");
+        if (!StringUtils.isEmpty(key)) {
+            wrapper.eq("id", key).or().like("name", key)
+                    .or().like("address", key)
+                    .or().like("areacode", key);
         }
         IPage<WareInfoEntity> page = this.page(
                 new Query<WareInfoEntity>().getPage(params),
@@ -50,8 +51,9 @@ public class WareInfoServiceImpl extends ServiceImpl<WareInfoDao, WareInfoEntity
         FareVo fareVo = new FareVo();
         //收货地址的详细信息
         R addrInfo = memberFeignService.addrInfo(addrId);
-        MemberAddressVo memberAddressVo = addrInfo.getData("memberReceiveAddress",new TypeReference<MemberAddressVo>(){});
-        if (memberAddressVo!=null){
+        MemberAddressVo memberAddressVo = addrInfo.getData("memberReceiveAddress", new TypeReference<MemberAddressVo>() {
+        });
+        if (memberAddressVo != null) {
             String phone = memberAddressVo.getPhone();
             //截取用户手机号码最后一位作为我们的运费计算
             //1558022051

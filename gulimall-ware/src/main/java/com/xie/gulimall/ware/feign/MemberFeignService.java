@@ -12,5 +12,5 @@ public interface MemberFeignService {
      */
     @RequestMapping("/member/memberreceiveaddress/info/{id}")
     //@RequiresPermissions("member:memberreceiveaddress:info")
-     R addrInfo(@PathVariable("id") Long id);
+    R addrInfo(@PathVariable("id") Long id);
 }

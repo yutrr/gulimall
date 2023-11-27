@@ -31,7 +31,7 @@ public class CartController {
      * 订单服务调用：【购物车页面点击确认订单时】
      * 返回所有选中的商品项【从redis中取】
      * 并且要获取最新的商品价格信息，而不是redis中的数据
-     *
+     * <p>
      * 获取当前用户的购物车所有商品项
      */
     @GetMapping(value = "/currentUserCartItems")
@@ -46,10 +46,11 @@ public class CartController {
      * 浏览器有一个cookie;user-key；标识用户身份，一个月后过期
      * 如果第一次使用jd的购物车功能，都会给一个临时的用户身份
      * 浏览器以后保存，每次访问都会带上这个cookie;
-     *
+     * <p>
      * 登录：session有
      * 没登录：按照cookie里面带来的user-key来做
      * 第一次：如果没有临时用户，要给她创建一个user-key
+     *
      * @return
      */
     @GetMapping("/cart.html")
@@ -59,7 +60,7 @@ public class CartController {
         //1.快速得到用户信息，id,user-key
         //UserInfoTo userInfoTo = CartInterceptor.threadLocal.get();
         CartVo cartVo = cartService.getCart();
-        model.addAttribute("cart",cartVo);
+        model.addAttribute("cart", cartVo);
         return "cartList";
     }
 
@@ -67,14 +68,15 @@ public class CartController {
      * 添加商品到购物车
      * attributes.addFlashAttribute():将数据放在session中，可以在页面中取出，但是只能取一次
      * attributes.addAttribute():将数据放在url后面
+     *
      * @return
      */
     @GetMapping("/addToCart")
-    public String addToCart(@RequestParam("skuId")Long skuId,
-                            @RequestParam("num")Integer num,
+    public String addToCart(@RequestParam("skuId") Long skuId,
+                            @RequestParam("num") Integer num,
                             RedirectAttributes attributes) throws ExecutionException, InterruptedException {
-        cartService.addToCart(skuId,num);
-       attributes.addAttribute("skuId",skuId);// 给重定向请求用的【参数会拼接在下面请求之后】【转发会在请求域中】
+        cartService.addToCart(skuId, num);
+        attributes.addAttribute("skuId", skuId);// 给重定向请求用的【参数会拼接在下面请求之后】【转发会在请求域中】
         return "redirect:http://cart.gulimall.com/addToCartSuccessPage.html";
     }
 
@@ -83,10 +85,10 @@ public class CartController {
      */
     @GetMapping("/addToCartSuccessPage.html")
     public String addToCartSuccessPage(@RequestParam("skuId") Long skuId,
-                                       Model model){
+                                       Model model) {
         //重定向到成功页面。再次查询购物车数据即可
         CartItemVo cartItemVo = cartService.getCartItem(skuId);
-        model.addAttribute("cartItem",cartItemVo);
+        model.addAttribute("cartItem", cartItemVo);
         return "success";
     }
 
@@ -96,7 +98,7 @@ public class CartController {
     @GetMapping(value = "/checkItem")
     public String checkItem(@RequestParam(value = "skuId") Long skuId,
                             @RequestParam(value = "checked") Integer checked) {
-        cartService.checkItem(skuId,checked);
+        cartService.checkItem(skuId, checked);
         return "redirect:http://cart.gulimall.com/cart.html";
     }
 
@@ -107,7 +109,7 @@ public class CartController {
     @GetMapping(value = "/countItem")
     public String countItem(@RequestParam(value = "skuId") Long skuId,
                             @RequestParam(value = "num") Integer num) {
-        cartService.changeItemCount(skuId,num);
+        cartService.changeItemCount(skuId, num);
         return "redirect:http://cart.gulimall.com/cart.html";
     }
 

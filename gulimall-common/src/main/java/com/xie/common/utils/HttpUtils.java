@@ -165,6 +165,7 @@ public class HttpUtils {
 
     /**
      * Put String
+     *
      * @param host
      * @param path
      * @param method
@@ -195,6 +196,7 @@ public class HttpUtils {
 
     /**
      * Put stream
+     *
      * @param host
      * @param path
      * @param method
@@ -295,14 +297,16 @@ public class HttpUtils {
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
+
                 public void checkClientTrusted(X509Certificate[] xcs, String str) {
 
                 }
+
                 public void checkServerTrusted(X509Certificate[] xcs, String str) {
 
                 }
             };
-            ctx.init(null, new TrustManager[] { tm }, null);
+            ctx.init(null, new TrustManager[]{tm}, null);
             SSLSocketFactory ssf = new SSLSocketFactory(ctx);
             ssf.setHostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
             ClientConnectionManager ccm = httpClient.getConnectionManager();

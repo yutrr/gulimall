@@ -16,6 +16,7 @@ import java.util.HashMap;
  * @Date: 2023/2/7 21:11
  * @Version 1.0
  */
+
 /**
  * 创建队列，交换机，延迟队列，绑定关系 的configuration
  * 不会重复创建覆盖
@@ -28,10 +29,11 @@ public class MyMQConfig {
 
     /**
      * 延时队列
+     *
      * @return
      */
     @Bean
-    public Queue orderDelayQueue(){
+    public Queue orderDelayQueue() {
         HashMap<String, Object> arguments = new HashMap<>();
         arguments.put("x-dead-letter-exchange", "order-event-exchange");// 死信路由
         arguments.put("x-dead-letter-routing-key", "order.release.order");// 死信路由键
@@ -43,26 +45,28 @@ public class MyMQConfig {
             boolean autoDelete, 是否自动删除
             Map<String, Object> arguments) 属性【TTL、死信路由、死信路由键】
          */
-        Queue queue = new Queue("order.delay.queue",true,false,false,arguments);
+        Queue queue = new Queue("order.delay.queue", true, false, false, arguments);
         return queue;
     }
 
     /**
      * 死信队列
+     *
      * @return
      */
     @Bean
-    public Queue orderReleaseOrderQueue(){
-        Queue queue = new Queue("order.release.order.queue",true,false,false);
+    public Queue orderReleaseOrderQueue() {
+        Queue queue = new Queue("order.release.order.queue", true, false, false);
         return queue;
     }
 
     /**
      * 死信路由[普通路由]
+     *
      * @return
      */
     @Bean
-    public Exchange orderEventExchange(){
+    public Exchange orderEventExchange() {
         /*
          *   String name,
          *   boolean durable,
@@ -77,6 +81,7 @@ public class MyMQConfig {
 
     /**
      * 交换机与延时队列的绑定
+     *
      * @return
      */
     @Bean
@@ -98,10 +103,11 @@ public class MyMQConfig {
 
     /**
      * 死信路由与普通死信队列的绑定
+     *
      * @return
      */
     @Bean
-    public Binding orderReleaseOrderBinding(){
+    public Binding orderReleaseOrderBinding() {
         Binding binding = new Binding("order.release.order.queue",
                 Binding.DestinationType.QUEUE,
                 "order-event-exchange",
@@ -112,10 +118,11 @@ public class MyMQConfig {
 
     /**
      * 订单释放直接和库存释放进行绑定
+     *
      * @return
      */
     @Bean
-    public Binding orderReleaseOtherBinding(){
+    public Binding orderReleaseOtherBinding() {
         Binding binding = new Binding("stock.release.stock.queue",
                 Binding.DestinationType.QUEUE,
                 "order-event-exchange",

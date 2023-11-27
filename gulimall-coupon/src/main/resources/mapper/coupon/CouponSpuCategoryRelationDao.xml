@@ -3,7 +3,7 @@
 
 <mapper namespace="com.xie.gulimall.coupon.dao.CouponSpuCategoryRelationDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.xie.gulimall.coupon.entity.CouponSpuCategoryRelationEntity" id="couponSpuCategoryRelationMap">
         <result property="id" column="id"/>
         <result property="couponId" column="coupon_id"/>

@@ -7,8 +7,7 @@ package com.xie.common.to;
  * @Date: 2022/9/20 20:55
  * @Version 1.0
  */
-public class SkuHasStockVo
-{
+public class SkuHasStockVo {
     private Long skuId;
     private Boolean hasStock;
 

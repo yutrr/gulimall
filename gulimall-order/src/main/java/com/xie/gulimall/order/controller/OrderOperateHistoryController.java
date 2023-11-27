@@ -16,7 +16,6 @@ import com.xie.common.utils.PageUtils;
 import com.xie.common.utils.R;
 
 
-
 /**
  * 订单操作历史记录
  *
@@ -35,7 +34,7 @@ public class OrderOperateHistoryController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("order:orderoperatehistory:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = orderOperateHistoryService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -47,8 +46,8 @@ public class OrderOperateHistoryController {
      */
     @RequestMapping("/info/{id}")
     //@RequiresPermissions("order:orderoperatehistory:info")
-    public R info(@PathVariable("id") Long id){
-		OrderOperateHistoryEntity orderOperateHistory = orderOperateHistoryService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        OrderOperateHistoryEntity orderOperateHistory = orderOperateHistoryService.getById(id);
 
         return R.ok().put("orderOperateHistory", orderOperateHistory);
     }
@@ -58,8 +57,8 @@ public class OrderOperateHistoryController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("order:orderoperatehistory:save")
-    public R save(@RequestBody OrderOperateHistoryEntity orderOperateHistory){
-		orderOperateHistoryService.save(orderOperateHistory);
+    public R save(@RequestBody OrderOperateHistoryEntity orderOperateHistory) {
+        orderOperateHistoryService.save(orderOperateHistory);
 
         return R.ok();
     }
@@ -69,8 +68,8 @@ public class OrderOperateHistoryController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("order:orderoperatehistory:update")
-    public R update(@RequestBody OrderOperateHistoryEntity orderOperateHistory){
-		orderOperateHistoryService.updateById(orderOperateHistory);
+    public R update(@RequestBody OrderOperateHistoryEntity orderOperateHistory) {
+        orderOperateHistoryService.updateById(orderOperateHistory);
 
         return R.ok();
     }
@@ -80,8 +79,8 @@ public class OrderOperateHistoryController {
      */
     @RequestMapping("/delete")
     //@RequiresPermissions("order:orderoperatehistory:delete")
-    public R delete(@RequestBody Long[] ids){
-		orderOperateHistoryService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        orderOperateHistoryService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.xie.gulimall.ware.dao.PurchaseDetailDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.xie.gulimall.ware.entity.PurchaseDetailEntity" id="purchaseDetailMap">
         <result property="id" column="id"/>
         <result property="purchaseId" column="purchase_id"/>

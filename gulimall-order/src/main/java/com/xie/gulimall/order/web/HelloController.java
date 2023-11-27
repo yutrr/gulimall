@@ -33,13 +33,13 @@ public class HelloController {
         orderEntity.setModifyTime(new Date());
 
         //给MQ发送消息
-        rabbitTemplate.convertAndSend("order-event-exchange","order.create.order",orderEntity);
+        rabbitTemplate.convertAndSend("order-event-exchange", "order.create.order", orderEntity);
 
         return "ok";
     }
 
     @GetMapping("/{page}.html")
-    public String listPage(@PathVariable("page") String page){
+    public String listPage(@PathVariable("page") String page) {
         return page;
     }
 }

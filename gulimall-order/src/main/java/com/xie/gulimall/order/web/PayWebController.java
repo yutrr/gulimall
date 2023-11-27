@@ -28,12 +28,13 @@ public class PayWebController {
      * 用户下单:支付宝支付
      * 1、让支付页让浏览器展示
      * 2、支付成功以后，跳转到用户的订单列表页
+     *
      * @param orderSn
      * @return
      * @throws AlipayApiException
      */
     @ResponseBody
-    @GetMapping(value = "/aliPayOrder",produces = "text/html")
+    @GetMapping(value = "/aliPayOrder", produces = "text/html")
     public String payOrder(@RequestParam("orderSn") String orderSn) throws AlipayApiException {
         AlipayTemplate.PayVo payVo = orderService.getOrderPay(orderSn);
         // 支付宝返回一个页面【支付宝账户登录的html页面】

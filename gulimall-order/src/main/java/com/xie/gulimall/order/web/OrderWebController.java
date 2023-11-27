@@ -30,40 +30,40 @@ public class OrderWebController {
 
     @GetMapping("/toTrade")
     public String toTrade(Model model, HttpServletRequest request) throws ExecutionException, InterruptedException {
-        OrderConfirmVo confirmVo=orderService.confirmOrder();
-        model.addAttribute("orderConfirmData",confirmVo);
+        OrderConfirmVo confirmVo = orderService.confirmOrder();
+        model.addAttribute("orderConfirmData", confirmVo);
         //展示订单确认的数据
         return "confirm";
     }
 
 
     @RequestMapping("/submitOrder")
-    public String submitOrder(OrderSubmitVo submitVo, Model model, RedirectAttributes attributes){
-      try {
-          SubmitOrderResponseVo responseVo= orderService.submitOrder(submitVo);
-          Integer code = responseVo.getCode();
-          if (code==0){
-              model.addAttribute("order",responseVo.getOrder());
-              return "pay";
-          }else {
-              String msg="下单失败;";
-              switch (code){
-                  case 1:
-                      msg+="防重令牌校验失败";
-                      break;
-                  case 2:
-                      msg+="商品价格发生变化";
-                      break;
-              }
-              attributes.addFlashAttribute("msg",msg);
-              return "redirect:http://order.gulimall.com/toTrade";
-          }
-      }catch (Exception e){
-          if (e instanceof NoStockException){
-              String msg="下单失败，商品无库存";
-              attributes.addFlashAttribute("msg",msg);
-          }
-          return "redirect:http://order.gulimall.com/toTrade";
-      }
-      }
+    public String submitOrder(OrderSubmitVo submitVo, Model model, RedirectAttributes attributes) {
+        try {
+            SubmitOrderResponseVo responseVo = orderService.submitOrder(submitVo);
+            Integer code = responseVo.getCode();
+            if (code == 0) {
+                model.addAttribute("order", responseVo.getOrder());
+                return "pay";
+            } else {
+                String msg = "下单失败;";
+                switch (code) {
+                    case 1:
+                        msg += "防重令牌校验失败";
+                        break;
+                    case 2:
+                        msg += "商品价格发生变化";
+                        break;
+                }
+                attributes.addFlashAttribute("msg", msg);
+                return "redirect:http://order.gulimall.com/toTrade";
+            }
+        } catch (Exception e) {
+            if (e instanceof NoStockException) {
+                String msg = "下单失败，商品无库存";
+                attributes.addFlashAttribute("msg", msg);
+            }
+            return "redirect:http://order.gulimall.com/toTrade";
+        }
+    }
 }

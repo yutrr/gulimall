@@ -53,7 +53,7 @@ class GulimallOrderApplicationTests {
 
     @Test
     void contextLoads() throws IOException {
-        BufferedReader bf=new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         String readLine = bf.readLine();
         String[] s = readLine.split(" ");
         int length = s[s.length - 1].length();
@@ -62,24 +62,23 @@ class GulimallOrderApplicationTests {
     }
 
 
-
     /**
      * 1.如何创建Exchange,Queue,Binding
-     *    1),使用AmqpAdmin进行创建
-     *  2.如何收发消息
+     * 1),使用AmqpAdmin进行创建
+     * 2.如何收发消息
      */
     //创建交换机
     @Test
-    public void createExchange(){
+    public void createExchange() {
         //amqpAdmin
         //Exchange,declareExchange--声明一个交换机
         // public DirectExchange(String name,     交换机名称
         // boolean durable,                        是否持久化
         // boolean autoDelete,                      是否自动删除
         // Map<String, Object> arguments)           参数
-        DirectExchange directExchange = new DirectExchange("hello-java-exchange",true,false);
+        DirectExchange directExchange = new DirectExchange("hello-java-exchange", true, false);
         amqpAdmin.declareExchange(directExchange);
-        log.info("Exchange[{}]创建成功","hello-java-exchange");
+        log.info("Exchange[{}]创建成功", "hello-java-exchange");
     }
 
     //创建队列
@@ -90,9 +89,9 @@ class GulimallOrderApplicationTests {
 //        boolean exclusive,            是否是排他队列(只能被一个consumer的连接占用)
 //        boolean autoDelete,          是否自动删除
 //        @Nullable Map<String, Object> arguments)  参数
-        Queue queue = new Queue("hello-java-queue",true,false,false);
+        Queue queue = new Queue("hello-java-queue", true, false, false);
         amqpAdmin.declareQueue(queue);
-        log.info("queue[{}]创建成功","hello-java-queue");
+        log.info("queue[{}]创建成功", "hello-java-queue");
     }
 
     //创建绑定
@@ -104,9 +103,9 @@ class GulimallOrderApplicationTests {
 //                String routingKey,                        【路由键】
 //                @Nullable Map<String, Object> arguments)  【自定义参数】
         //将exchange指定的交换机和destination目的地进行绑定，使用routingKey作为指定的路由键
-        Binding binding = new Binding("hello-java-queue", Binding.DestinationType.QUEUE,"hello-java-exchange","test.binding",null);
+        Binding binding = new Binding("hello-java-queue", Binding.DestinationType.QUEUE, "hello-java-exchange", "test.binding", null);
         amqpAdmin.declareBinding(binding);
-        log.info("binding[{}]绑定成功","test-binding");
+        log.info("binding[{}]绑定成功", "test-binding");
     }
 
 }

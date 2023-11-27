@@ -4,5 +4,6 @@
       "name": "spring.cloud.loadbalancer.ribbon.enabled",
       "type": "java.lang.String",
       "description": "Description for spring.cloud.loadbalancer.ribbon.enabled."
-  }
-] }
+    }
+  ]
+}

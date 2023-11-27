@@ -15,11 +15,11 @@ public interface WmsFeignService {
 
     //查询sku是否有库存
     @PostMapping("/ware/waresku/hasstock")
-     R getSkuHasStock(@RequestBody List<Long> skuIds);
+    R getSkuHasStock(@RequestBody List<Long> skuIds);
 
     @GetMapping("/ware/wareinfo/fare")
-     R getFare(@RequestParam("addrId")Long addrId);
+    R getFare(@RequestParam("addrId") Long addrId);
 
     @PostMapping("/ware/waresku/lock/order")
-     R orderLockStock(@RequestBody WareSkuLockVo lockVo);
+    R orderLockStock(@RequestBody WareSkuLockVo lockVo);
 }

@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface OrderFeignService {
 
     @GetMapping(value = "/order/order/status/{orderSn}")
-     R getOrderStatus(@PathVariable("orderSn") String orderSn);
+    R getOrderStatus(@PathVariable("orderSn") String orderSn);
 }

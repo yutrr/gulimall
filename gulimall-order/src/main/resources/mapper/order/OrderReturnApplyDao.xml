@@ -3,7 +3,7 @@
 
 <mapper namespace="com.xie.gulimall.order.dao.OrderReturnApplyDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.xie.gulimall.order.entity.OrderReturnApplyEntity" id="orderReturnApplyMap">
         <result property="id" column="id"/>
         <result property="orderId" column="order_id"/>

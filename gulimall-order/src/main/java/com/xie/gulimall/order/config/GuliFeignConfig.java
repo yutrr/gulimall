@@ -20,19 +20,19 @@ import javax.servlet.http.HttpServletRequest;
 public class GuliFeignConfig {
 
     @Bean("requestInterceptor")
-    public RequestInterceptor requestInterceptor(){
+    public RequestInterceptor requestInterceptor() {
         RequestInterceptor requestInterceptor = template -> {
 
             //1、使用RequestContextHolder拿到刚进来的请求数据
-            ServletRequestAttributes attributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
-            if (attributes!=null) {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            if (attributes != null) {
                 HttpServletRequest request = attributes.getRequest();//老请求
-                if (request!=null){
+                if (request != null) {
                     //2、同步请求头的数据（主要是cookie）
                     //把老请求的cookie值放到新请求上来，进行一个同步
                     String cookie = request.getHeader("Cookie");
                     //给新请求同步了老请求的cookie
-                    template.header("Cookie",cookie);
+                    template.header("Cookie", cookie);
                 }
             }
         };

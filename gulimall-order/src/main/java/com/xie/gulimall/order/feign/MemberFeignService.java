@@ -10,5 +10,5 @@ import java.util.List;
 @FeignClient("gulimall-member")
 public interface MemberFeignService {
     @GetMapping(value = "/member/memberreceiveaddress/{memberId}/address")
-     List<MemberAddressVo> getAddress(@PathVariable("memberId") Long memberId);
+    List<MemberAddressVo> getAddress(@PathVariable("memberId") Long memberId);
 }

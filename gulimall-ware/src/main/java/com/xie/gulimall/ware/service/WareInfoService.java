@@ -21,6 +21,7 @@ public interface WareInfoService extends IService<WareInfoEntity> {
 
     /**
      * 根据用户地址计算运费
+     *
      * @param addrId
      * @return
      */

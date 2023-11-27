@@ -24,18 +24,18 @@ public class RabbitController {
     RabbitTemplate rabbitTemplate;
 
     @GetMapping("/sendMq")
-    public String sendMq(@RequestParam(value = "num",defaultValue = "10") Integer num){
-        for (int i = 0; i <num ; i++) {
-            if (i%2==0){
+    public String sendMq(@RequestParam(value = "num", defaultValue = "10") Integer num) {
+        for (int i = 0; i < num; i++) {
+            if (i % 2 == 0) {
                 OrderReturnReasonEntity orderReturnReasonEntity = new OrderReturnReasonEntity();
                 orderReturnReasonEntity.setId(1L);
-                orderReturnReasonEntity.setName("哈哈"+i);
+                orderReturnReasonEntity.setName("哈哈" + i);
                 orderReturnReasonEntity.setCreateTime(new Date());
-                rabbitTemplate.convertAndSend("hello-java-exchange","test.binding",orderReturnReasonEntity,new CorrelationData(UUID.randomUUID().toString()));
-            }else {
-                OrderEntity entity=new OrderEntity();
+                rabbitTemplate.convertAndSend("hello-java-exchange", "test.binding", orderReturnReasonEntity, new CorrelationData(UUID.randomUUID().toString()));
+            } else {
+                OrderEntity entity = new OrderEntity();
                 entity.setOrderSn(UUID.randomUUID().toString());
-                rabbitTemplate.convertAndSend("hello-java-exchange","sss",entity,new CorrelationData(UUID.randomUUID().toString()));
+                rabbitTemplate.convertAndSend("hello-java-exchange", "sss", entity, new CorrelationData(UUID.randomUUID().toString()));
             }
         }
         return "ok";

@@ -3,10 +3,10 @@ package com.xie.common.to.mq;
 /**
  * 库存单详情
  * wms_ware_order_task_detail
+ *
  * @author zr
  * @date 2021/12/29 15:07
  */
-
 
 
 public class StockDetailTo {

@@ -16,8 +16,8 @@ import java.io.IOException;
  * @Author Xie
  * @Date: 2023/2/28 20:08
  * @Version 1.0
- *
  */
+
 /**
  * 定时关闭订单
  *
@@ -31,12 +31,12 @@ public class OrderCloseListener {
 
     @RabbitHandler
     public void listen(OrderEntity orderEntity, Channel channel, Message message) throws IOException {
-        System.out.println("收到过期订单消息,准备关闭订单:------>"+orderEntity.getOrderSn());
+        System.out.println("收到过期订单消息,准备关闭订单:------>" + orderEntity.getOrderSn());
         try {
             orderService.closeOrder(orderEntity);
-            channel.basicNack(message.getMessageProperties().getDeliveryTag(),false,false);
-        }catch (Exception e){
-            channel.basicReject(message.getMessageProperties().getDeliveryTag(),true);
+            channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
+        } catch (Exception e) {
+            channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
         }
 
     }

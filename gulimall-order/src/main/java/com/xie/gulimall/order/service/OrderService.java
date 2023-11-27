@@ -26,12 +26,14 @@ public interface OrderService extends IService<OrderEntity> {
 
     /**
      * 订单确认页返回需要的数据
+     *
      * @return
      */
     OrderConfirmVo confirmOrder() throws ExecutionException, InterruptedException;
 
     /**
      * 下单操作
+     *
      * @param submitVo
      * @return
      */
@@ -43,6 +45,7 @@ public interface OrderService extends IService<OrderEntity> {
 
     /**
      * 获取当前订单的支付信息
+     *
      * @param orderSn
      * @return
      */

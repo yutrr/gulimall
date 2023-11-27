@@ -42,7 +42,7 @@ public class MyRabbitConfig {
          * cause：失败的原因
          */
         //设置确认回调
-        rabbitTemplate.setConfirmCallback((correlationData,ack,cause) -> System.out.println("confirm...correlationData["+correlationData+"]==>ack:["+ack+"]==>cause:["+cause+"]"));
+        rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> System.out.println("confirm...correlationData[" + correlationData + "]==>ack:[" + ack + "]==>cause:[" + cause + "]"));
 
 
         /**
@@ -56,18 +56,19 @@ public class MyRabbitConfig {
         /*rabbitTemplate.setReturnsCallback(returned -> System.out.println("Fail Message["+returned.getMessage()+"]==>replyCode["+returned.getReplyCode()+"]" +
                 "==>replyText["+returned.getReplyText()+"]==>exchange["+returned.getExchange()+"]==>routingKey["+returned.getRoutingKey()+"]"));*/
         //已经过时
-        rabbitTemplate.setReturnCallback((message,replyCode,replyText,exchange,routingKey) -> {
-            System.out.println("Fail Message["+message+"]==>replyCode["+replyCode+"]" +
-                    "==>replyText["+replyText+"]==>exchange["+exchange+"]==>routingKey["+routingKey+"]");
+        rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
+            System.out.println("Fail Message[" + message + "]==>replyCode[" + replyCode + "]" +
+                    "==>replyText[" + replyText + "]==>exchange[" + exchange + "]==>routingKey[" + routingKey + "]");
         });
     }
 
     /**
      * 使用JSON序列化机制，进行信息转换
+     *
      * @return
      */
     @Bean
-    public MessageConverter messageConverter(){
+    public MessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 

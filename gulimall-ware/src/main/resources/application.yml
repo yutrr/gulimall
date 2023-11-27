@@ -1,9 +1,9 @@
 #配置数据库驱动
 spring:
   # Spring
-#  main:
-    # 解决 Seata 循环依赖问题
-#    allow-circular-references: true
+  #  main:
+  # 解决 Seata 循环依赖问题
+  #    allow-circular-references: true
   datasource:
     username: root
     password: root

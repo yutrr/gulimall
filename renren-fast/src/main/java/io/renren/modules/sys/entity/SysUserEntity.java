@@ -1,8 +1,8 @@
 /**
  * Copyright (c) 2016-2019 人人开源 All rights reserved.
- *
+ * <p>
  * https://www.renren.io
- *
+ * <p>
  * 版权所有，侵权必究！
  */
 
@@ -28,173 +28,173 @@ import java.util.List;
  */
 @TableName("sys_user")
 public class SysUserEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * 用户ID
-	 */
-	@TableId
-	private Long userId;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 用户名
-	 */
-	@NotBlank(message="用户名不能为空", groups = {AddGroup.class, UpdateGroup.class})
-	private String username;
+    /**
+     * 用户ID
+     */
+    @TableId
+    private Long userId;
 
-	/**
-	 * 密码
-	 */
-	@NotBlank(message="密码不能为空", groups = AddGroup.class)
-	private String password;
+    /**
+     * 用户名
+     */
+    @NotBlank(message = "用户名不能为空", groups = {AddGroup.class, UpdateGroup.class})
+    private String username;
 
-	/**
-	 * 盐
-	 */
-	private String salt;
+    /**
+     * 密码
+     */
+    @NotBlank(message = "密码不能为空", groups = AddGroup.class)
+    private String password;
 
-	/**
-	 * 邮箱
-	 */
-	@NotBlank(message="邮箱不能为空", groups = {AddGroup.class, UpdateGroup.class})
-	@Email(message="邮箱格式不正确", groups = {AddGroup.class, UpdateGroup.class})
-	private String email;
+    /**
+     * 盐
+     */
+    private String salt;
 
-	/**
-	 * 手机号
-	 */
-	private String mobile;
+    /**
+     * 邮箱
+     */
+    @NotBlank(message = "邮箱不能为空", groups = {AddGroup.class, UpdateGroup.class})
+    @Email(message = "邮箱格式不正确", groups = {AddGroup.class, UpdateGroup.class})
+    private String email;
 
-	/**
-	 * 状态  0：禁用   1：正常
-	 */
-	private Integer status;
+    /**
+     * 手机号
+     */
+    private String mobile;
 
-	/**
-	 * 角色ID列表
-	 */
-	@TableField(exist=false)
-	private List<Long> roleIdList;
+    /**
+     * 状态  0：禁用   1：正常
+     */
+    private Integer status;
 
-	/**
-	 * 创建者ID
-	 */
-	private Long createUserId;
+    /**
+     * 角色ID列表
+     */
+    @TableField(exist = false)
+    private List<Long> roleIdList;
 
-	/**
-	 * 创建时间
-	 */
-	private Date createTime;
+    /**
+     * 创建者ID
+     */
+    private Long createUserId;
 
-	@Override
-	public String toString() {
-		return "SysUserEntity{" +
-				"userId=" + userId +
-				", username='" + username + '\'' +
-				", password='" + password + '\'' +
-				", salt='" + salt + '\'' +
-				", email='" + email + '\'' +
-				", mobile='" + mobile + '\'' +
-				", status=" + status +
-				", roleIdList=" + roleIdList +
-				", createUserId=" + createUserId +
-				", createTime=" + createTime +
-				'}';
-	}
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
-	public Long getUserId() {
-		return userId;
-	}
+    @Override
+    public String toString() {
+        return "SysUserEntity{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", status=" + status +
+                ", roleIdList=" + roleIdList +
+                ", createUserId=" + createUserId +
+                ", createTime=" + createTime +
+                '}';
+    }
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getSalt() {
-		return salt;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
+    public String getSalt() {
+        return salt;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getMobile() {
-		return mobile;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+    public String getMobile() {
+        return mobile;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public List<Long> getRoleIdList() {
-		return roleIdList;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public void setRoleIdList(List<Long> roleIdList) {
-		this.roleIdList = roleIdList;
-	}
+    public List<Long> getRoleIdList() {
+        return roleIdList;
+    }
 
-	public Long getCreateUserId() {
-		return createUserId;
-	}
+    public void setRoleIdList(List<Long> roleIdList) {
+        this.roleIdList = roleIdList;
+    }
 
-	public void setCreateUserId(Long createUserId) {
-		this.createUserId = createUserId;
-	}
+    public Long getCreateUserId() {
+        return createUserId;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public SysUserEntity() {
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public SysUserEntity(Long userId, String username, String password, String salt, String email, String mobile, Integer status, List<Long> roleIdList, Long createUserId, Date createTime) {
-		this.userId = userId;
-		this.username = username;
-		this.password = password;
-		this.salt = salt;
-		this.email = email;
-		this.mobile = mobile;
-		this.status = status;
-		this.roleIdList = roleIdList;
-		this.createUserId = createUserId;
-		this.createTime = createTime;
-	}
+    public SysUserEntity() {
+    }
+
+    public SysUserEntity(Long userId, String username, String password, String salt, String email, String mobile, Integer status, List<Long> roleIdList, Long createUserId, Date createTime) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
+        this.email = email;
+        this.mobile = mobile;
+        this.status = status;
+        this.roleIdList = roleIdList;
+        this.createUserId = createUserId;
+        this.createTime = createTime;
+    }
 }

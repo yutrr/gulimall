@@ -65,6 +65,7 @@ public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionDao, Se
 
     /**
      * 当前时间
+     *
      * @return
      */
     private String startTime() {
@@ -79,6 +80,7 @@ public class SeckillSessionServiceImpl extends ServiceImpl<SeckillSessionDao, Se
 
     /**
      * 结束时间
+     *
      * @return
      */
     private String endTime() {

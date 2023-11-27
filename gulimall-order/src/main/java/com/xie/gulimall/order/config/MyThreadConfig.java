@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class MyThreadConfig {
 
     @Bean
-    public ThreadPoolExecutor threadPoolExecutor(ThreadConfigProperties pool){
+    public ThreadPoolExecutor threadPoolExecutor(ThreadConfigProperties pool) {
         return new ThreadPoolExecutor(
                 pool.getCoreSize(),
                 pool.getMaxSize(),
@@ -27,6 +27,6 @@ public class MyThreadConfig {
                 new LinkedBlockingDeque<>(100000),
                 Executors.defaultThreadFactory(),
                 new ThreadPoolExecutor.AbortPolicy()
-       );
+        );
     }
 }

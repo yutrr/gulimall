@@ -10,8 +10,7 @@ import lombok.Data;
  * @Version 1.0
  */
 @Data
-public class SkuHasStockVo
-{
+public class SkuHasStockVo {
     private Long skuId;
     private Boolean hasStock;
 }

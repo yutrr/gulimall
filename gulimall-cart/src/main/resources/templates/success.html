@@ -26,7 +26,8 @@
 
         <ul class="hd_wrap_right">
             <li>
-                <a th:if="${session.loginUser == null}" href="http://auth.gulimall.com/login.html" class="li_2">你好，请登录</a>
+                <a th:if="${session.loginUser == null}" href="http://auth.gulimall.com/login.html"
+                   class="li_2">你好，请登录</a>
                 <a th:if="${session.loginUser != null}">欢迎, [[${session.loginUser.nickname}]]</a>
             </li>
             <li>
@@ -79,7 +80,8 @@
                                     <a th:href="'http://item.gulimall.com/'+${cartItem.skuId}+'.html'"
                                        th:text="${cartItem.title}">TCL 55A950C 55英寸32核人工智能 HDR曲面超薄4K电视金属机身（枪色）</a>
                                 </div>
-                                <div class="p-extra"><span class="txt" th:text="'数量：'+${cartItem.count}">  数量：1</span></div>
+                                <div class="p-extra"><span class="txt" th:text="'数量：'+${cartItem.count}">  数量：1</span>
+                                </div>
                             </div>
                             <div class="clr"></div>
                         </div>

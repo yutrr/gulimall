@@ -19,15 +19,15 @@ import java.util.List;
 
 public class CartVo implements Serializable {
 
-     private List<CartItemVo> items;
+    private List<CartItemVo> items;
 
-     private Integer countNum;//商品数量
+    private Integer countNum;//商品数量
 
-     private Integer countType;//商品类型数量
+    private Integer countType;//商品类型数量
 
     private BigDecimal totalAmount;//商品总价
 
-    private BigDecimal reduce=new BigDecimal("0.00");//减免价格
+    private BigDecimal reduce = new BigDecimal("0.00");//减免价格
 
     public List<CartItemVo> getItems() {
         return items;
@@ -38,20 +38,20 @@ public class CartVo implements Serializable {
     }
 
     public Integer getCountNum() {
-        int count=0;
-        if (items!=null && items.size()>0){
+        int count = 0;
+        if (items != null && items.size() > 0) {
             for (CartItemVo item : items) {
-                count+=item.getCount();
+                count += item.getCount();
             }
         }
         return count;
     }
 
     public Integer getCountType() {
-        int count=0;
-        if (items!=null && items.size()>0){
+        int count = 0;
+        if (items != null && items.size() > 0) {
             for (CartItemVo item : items) {
-                count+=1;
+                count += 1;
             }
         }
         return count;
@@ -60,7 +60,7 @@ public class CartVo implements Serializable {
     public BigDecimal getTotalAmount() {
         BigDecimal amount = new BigDecimal("0");
         //1.计算购物项总价
-        if (items!=null && items.size()>0){
+        if (items != null && items.size() > 0) {
             for (CartItemVo item : items) {
                 if (item.getCheck()) {
                     BigDecimal totalPrice = item.getTotalPrice();

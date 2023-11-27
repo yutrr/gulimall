@@ -15,11 +15,10 @@ import java.util.List;
 
 /**
  * 购物项内容
- *
  */
 public class CartItemVo implements Serializable {
     private Long skuId;
-    private Boolean check=true;
+    private Boolean check = true;
     private String title;
     private String image;
     private List<String> skuAttr;
@@ -85,6 +84,7 @@ public class CartItemVo implements Serializable {
 
     /**
      * 计算购物项总价
+     *
      * @return
      */
     public BigDecimal getTotalPrice() {

@@ -7,7 +7,6 @@ import com.xie.gulimall.ware.entity.WareOrderTaskEntity;
 import java.util.Map;
 
 /**
- *
  * 库存工作单
  *
  * @author xiehaijun

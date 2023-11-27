@@ -17,8 +17,12 @@ import java.util.List;
 public class OrderCreateTo {
     private OrderEntity order;  // 订单
     private List<OrderItemEntity> orderItems; // 订单项
-    /** 订单计算的应付价格 **/
+    /**
+     * 订单计算的应付价格
+     **/
     private BigDecimal payPrice;
-    /** 运费 **/
+    /**
+     * 运费
+     **/
     private BigDecimal fare;
 }
